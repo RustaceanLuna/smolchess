@@ -1,0 +1,18 @@
+[package]
+name = "smolchess"
+version = "0.1.0"
+edition = "2024"
+categories = ["no-std", "no-std::no-alloc", "game"]
+keywords = ["chess", "game"]
+license = "MIT OR Apache-2.0"
+
+[dependencies]
+thiserror = "2.0.20"
+
+[features]
+default = ["std"]
+std = []
+alloc = []
+hyperbola = []
+nightly = []
+pext = ["nightly"]
