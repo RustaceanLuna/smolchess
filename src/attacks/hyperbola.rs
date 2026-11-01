@@ -39,7 +39,7 @@ const fn hyperbola(square: u8, occupied: u64, mask: u64) -> u64 {
 /// # Examples
 ///
 /// ```
-/// use chess::{Square, Bitboard, attacks::bishop_attacks};
+/// use smolchess::{Square, Bitboard, attacks::bishop_attacks};
 ///
 /// let attacks = bishop_attacks(Square::E4, Bitboard::EMPTY);
 /// assert!(!attacks.is_empty());
@@ -68,7 +68,7 @@ pub const fn bishop_attacks(square: Square, occupied: Bitboard) -> Bitboard {
 /// # Examples
 ///
 /// ```
-/// use chess::{Square, Bitboard, attacks::rook_attacks};
+/// use smolchess::{Square, Bitboard, attacks::rook_attacks};
 ///
 /// let attacks = rook_attacks(Square::E4, Bitboard::EMPTY);
 /// assert!(!attacks.is_empty());

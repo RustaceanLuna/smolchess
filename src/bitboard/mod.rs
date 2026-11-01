@@ -6,7 +6,7 @@
 /// # Examples
 ///
 /// ```
-/// use chess::{Square, Bitboard};
+/// use smolchess::{Square, Bitboard};
 ///
 /// let bb = Bitboard::from_square(Square::E4);
 /// let rank = Bitboard::from_rank(Square::E4.rank());

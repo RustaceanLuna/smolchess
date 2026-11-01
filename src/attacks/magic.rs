@@ -110,7 +110,11 @@ const ROOK_ENTRIES: [MagicEntry; Square::COUNT] = build_entries(PieceKind::Rook)
 #[inline]
 #[cfg(not(feature = "pext"))]
 const fn get_index(entry: &MagicEntry, occupied: Bitboard) -> usize {
-    (entry.magic.wrapping_mul(occupied.intersect(entry.mask).value) >> entry.shift) as usize + entry.offset
+    (entry
+        .magic
+        .wrapping_mul(occupied.intersect(entry.mask).value)
+        >> entry.shift) as usize
+        + entry.offset
 }
 
 #[cfg(feature = "pext")]
@@ -118,7 +122,10 @@ const fn get_index(entry: &MagicEntry, occupied: Bitboard) -> usize {
     occupied.value.extract_bits(entry.mask.value) as usize + entry.offset
 }
 
-const fn build_sliding_attacks<const N: usize>(entries: &[MagicEntry; 64], deltas: &[i8]) -> [Bitboard; N] {
+const fn build_sliding_attacks<const N: usize>(
+    entries: &[MagicEntry; 64],
+    deltas: &[i8],
+) -> [Bitboard; N] {
     let mut table = [Bitboard::EMPTY; N];
 
     let mut curr_square = Some(Square::A1);
@@ -131,7 +138,8 @@ const fn build_sliding_attacks<const N: usize>(entries: &[MagicEntry; 64], delta
             if occupied.value == entry.mask.value {
                 break;
             }
-            occupied = Bitboard::new(occupied.value.wrapping_sub(entry.mask.value) & entry.mask.value);
+            occupied =
+                Bitboard::new(occupied.value.wrapping_sub(entry.mask.value) & entry.mask.value);
         }
 
         curr_square = square.shift(1);
@@ -140,7 +148,8 @@ const fn build_sliding_attacks<const N: usize>(entries: &[MagicEntry; 64], delta
     table
 }
 
-static BISHOP_ATTACKS: [Bitboard; BISHOP_SIZE] = build_sliding_attacks(&BISHOP_ENTRIES, &[-9, -7, 7, 9]);
+static BISHOP_ATTACKS: [Bitboard; BISHOP_SIZE] =
+    build_sliding_attacks(&BISHOP_ENTRIES, &[-9, -7, 7, 9]);
 static ROOK_ATTACKS: [Bitboard; ROOK_SIZE] = build_sliding_attacks(&ROOK_ENTRIES, &[-8, -1, 1, 8]);
 
 /// Returns bishop attack squares considering blocking pieces using magic bitboards.
@@ -157,7 +166,7 @@ static ROOK_ATTACKS: [Bitboard; ROOK_SIZE] = build_sliding_attacks(&ROOK_ENTRIES
 /// # Examples
 ///
 /// ```
-/// use chess::{Square, Bitboard, attacks::bishop_attacks};
+/// use smolchess::{Square, Bitboard, attacks::bishop_attacks};
 ///
 /// let attacks = bishop_attacks(Square::E4, Bitboard::EMPTY);
 /// assert!(!attacks.is_empty());
@@ -187,7 +196,7 @@ pub const fn bishop_attacks(square: Square, occupied: Bitboard) -> Bitboard {
 /// # Examples
 ///
 /// ```
-/// use chess::{Square, Bitboard, attacks::rook_attacks};
+/// use smolchess::{Square, Bitboard, attacks::rook_attacks};
 ///
 /// let attacks = rook_attacks(Square::E4, Bitboard::EMPTY);
 /// assert!(!attacks.is_empty());

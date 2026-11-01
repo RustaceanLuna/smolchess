@@ -4,7 +4,9 @@ use core::slice;
 
 use crate::arrayvec::ArrayVec;
 use crate::attacks::{bishop_attacks, king_attacks, knight_attacks, rook_attacks};
-use crate::{Bitboard, CastlingSide, Color, CoreBoard, File, Move, MoveKind, PieceKind, Rank, Square};
+use crate::{
+    Bitboard, CastlingSide, Color, CoreBoard, File, Move, MoveKind, PieceKind, Rank, Square,
+};
 
 /// A list of chess moves.
 ///
@@ -14,7 +16,7 @@ use crate::{Bitboard, CastlingSide, Color, CoreBoard, File, Move, MoveKind, Piec
 /// # Examples
 ///
 /// ```
-/// use chess::{mv::{MoveList, movegen::AllMoves}, board::BoardBuilder};
+/// use smolchess::{mv::{MoveList, movegen::AllMoves}, board::BoardBuilder};
 ///
 /// let board = BoardBuilder::classical().build().unwrap();
 /// let moves = MoveList::new::<AllMoves>(&board);
@@ -29,7 +31,7 @@ impl MoveList {
     /// # Examples
     ///
     /// ```
-    /// use chess::{mv::{MoveList, movegen::AllMoves}, board::BoardBuilder};
+    /// use smolchess::{mv::{MoveList, movegen::AllMoves}, board::BoardBuilder};
     ///
     /// let board = BoardBuilder::classical().build().unwrap();
     /// let moves = MoveList::new::<AllMoves>(&board);
@@ -44,7 +46,7 @@ impl MoveList {
     /// # Examples
     ///
     /// ```
-    /// use chess::{mv::{MoveList, movegen::AllMoves}, board::BoardBuilder};
+    /// use smolchess::{mv::{MoveList, movegen::AllMoves}, board::BoardBuilder};
     ///
     /// let board = BoardBuilder::classical().build().unwrap();
     /// let moves = MoveList::new::<AllMoves>(&board);
@@ -63,7 +65,7 @@ impl MoveList {
     /// # Examples
     ///
     /// ```
-    /// use chess::{mv::{MoveList, movegen::AllMoves}, board::BoardBuilder};
+    /// use smolchess::{mv::{MoveList, movegen::AllMoves}, board::BoardBuilder};
     ///
     /// let board = BoardBuilder::classical().build().unwrap();
     /// let moves = MoveList::new::<AllMoves>(&board);
@@ -78,7 +80,7 @@ impl MoveList {
     /// # Examples
     ///
     /// ```
-    /// use chess::{mv::{MoveList, movegen::AllMoves}, board::BoardBuilder};
+    /// use smolchess::{mv::{MoveList, movegen::AllMoves}, board::BoardBuilder};
     ///
     /// let board = BoardBuilder::classical().build().unwrap();
     /// let moves = MoveList::new::<AllMoves>(&board);
@@ -96,7 +98,12 @@ impl MoveList {
         }
     }
 
-    const unsafe fn extend_from_bb(&mut self, from: Square, mut bitboard: Bitboard, kind: MoveKind) {
+    const unsafe fn extend_from_bb(
+        &mut self,
+        from: Square,
+        mut bitboard: Bitboard,
+        kind: MoveKind,
+    ) {
         while let Some(to) = bitboard.pop_lsb() {
             unsafe {
                 self.push(from, to, kind);
@@ -104,7 +111,12 @@ impl MoveList {
         }
     }
 
-    const unsafe fn extend_from_dir(&mut self, mut bitboard: Bitboard, direction: i8, kind: MoveKind) {
+    const unsafe fn extend_from_dir(
+        &mut self,
+        mut bitboard: Bitboard,
+        direction: i8,
+        kind: MoveKind,
+    ) {
         while let Some(to) = bitboard.pop_lsb() {
             unsafe {
                 self.push(to.shift_unchecked(-direction), to, kind);
@@ -163,7 +175,7 @@ impl Col for Black {
 /// # Examples
 ///
 /// ```
-/// use chess::mv::movegen::{AllMoves, Quiet, Capture, Tactical, MoveGenKind};
+/// use smolchess::mv::movegen::{AllMoves, Quiet, Capture, Tactical, MoveGenKind};
 ///
 /// assert!(AllMoves::HAS_QUIETS);
 /// assert!(AllMoves::HAS_CAPTURES);
@@ -183,7 +195,7 @@ pub trait MoveGenKind {
 /// # Examples
 ///
 /// ```
-/// use chess::{mv::MoveList, mv::movegen::AllMoves, board::BoardBuilder};
+/// use smolchess::{mv::MoveList, mv::movegen::AllMoves, board::BoardBuilder};
 ///
 /// let board = BoardBuilder::classical().build().unwrap();
 /// let moves = MoveList::new::<AllMoves>(&board);
@@ -195,7 +207,7 @@ pub struct AllMoves;
 /// # Examples
 ///
 /// ```
-/// use chess::{mv::MoveList, mv::movegen::Quiet, board::BoardBuilder};
+/// use smolchess::{mv::MoveList, mv::movegen::Quiet, board::BoardBuilder};
 ///
 /// let board = BoardBuilder::classical().build().unwrap();
 /// let moves = MoveList::new::<Quiet>(&board);
@@ -207,7 +219,7 @@ pub struct Quiet;
 /// # Examples
 ///
 /// ```
-/// use chess::{mv::MoveList, mv::movegen::Capture, board::BoardBuilder};
+/// use smolchess::{mv::MoveList, mv::movegen::Capture, board::BoardBuilder};
 ///
 /// let board = BoardBuilder::classical().build().unwrap();
 /// let moves = MoveList::new::<Capture>(&board);
@@ -219,7 +231,7 @@ pub struct Capture;
 /// # Examples
 ///
 /// ```
-/// use chess::{mv::MoveList, mv::movegen::Tactical, board::BoardBuilder};
+/// use smolchess::{mv::MoveList, mv::movegen::Tactical, board::BoardBuilder};
 ///
 /// let board = BoardBuilder::classical().build().unwrap();
 /// let moves = MoveList::new::<Tactical>(&board);
@@ -251,7 +263,11 @@ impl MoveGenKind for Tactical {
 }
 
 impl MoveList {
-    const unsafe fn extend_pawn_pushes<C: Col, M: MoveGenKind>(&mut self, board: &CoreBoard, target: Bitboard) {
+    const unsafe fn extend_pawn_pushes<C: Col, M: MoveGenKind>(
+        &mut self,
+        board: &CoreBoard,
+        target: Bitboard,
+    ) {
         let pawns = board.piece_bb(C::COLOR, PieceKind::Pawn).diff(
             board
                 .pinned(C::COLOR)
@@ -262,11 +278,18 @@ impl MoveList {
         if M::HAS_QUIETS {
             let pawns = pawns.diff(C::RANK_7);
             let single_pushes = pawns.shift(C::FORWARD).intersect(empty);
-            let double_pushes = single_pushes.intersect(C::RANK_3).shift(C::FORWARD).intersect(empty);
+            let double_pushes = single_pushes
+                .intersect(C::RANK_3)
+                .shift(C::FORWARD)
+                .intersect(empty);
 
             unsafe {
                 self.extend_from_dir(single_pushes.intersect(target), C::FORWARD, MoveKind::Quiet);
-                self.extend_from_dir(double_pushes.intersect(target), C::FORWARD * 2, MoveKind::DoublePush);
+                self.extend_from_dir(
+                    double_pushes.intersect(target),
+                    C::FORWARD * 2,
+                    MoveKind::DoublePush,
+                );
             }
         }
 
@@ -302,15 +325,27 @@ impl MoveList {
         let pawns = board.piece_bb(C::COLOR, PieceKind::Pawn);
 
         let pinned = board.pinned(C::COLOR);
-        let left_pawns = pawns.diff(pinned.diff(left_pin)).diff(File::A.to_bitboard());
-        let right_pawns = pawns.diff(pinned.diff(right_pin)).diff(File::H.to_bitboard());
+        let left_pawns = pawns
+            .diff(pinned.diff(left_pin))
+            .diff(File::A.to_bitboard());
+        let right_pawns = pawns
+            .diff(pinned.diff(right_pin))
+            .diff(File::H.to_bitboard());
 
         let left_captures = left_pawns.shift(C::FORWARD_LEFT).intersect(target);
         let right_captures = right_pawns.shift(C::FORWARD_RIGHT).intersect(target);
 
         unsafe {
-            self.extend_from_dir(left_captures.diff(C::RANK_8), C::FORWARD_LEFT, MoveKind::Capture);
-            self.extend_from_dir(right_captures.diff(C::RANK_8), C::FORWARD_RIGHT, MoveKind::Capture);
+            self.extend_from_dir(
+                left_captures.diff(C::RANK_8),
+                C::FORWARD_LEFT,
+                MoveKind::Capture,
+            );
+            self.extend_from_dir(
+                right_captures.diff(C::RANK_8),
+                C::FORWARD_RIGHT,
+                MoveKind::Capture,
+            );
         }
         unsafe {
             self.extend_promo_captures(left_captures.intersect(C::RANK_8), C::FORWARD_LEFT);
@@ -325,7 +360,11 @@ impl MoveList {
                 unsafe { self.push(pawn, square, MoveKind::EnPassant) }
             }
             if let Some(pawn) = right_pawns
-                .intersect(bitboard.diff(File::A.to_bitboard()).shift(-C::FORWARD_RIGHT))
+                .intersect(
+                    bitboard
+                        .diff(File::A.to_bitboard())
+                        .shift(-C::FORWARD_RIGHT),
+                )
                 .pop_lsb()
             {
                 unsafe { self.push(pawn, square, MoveKind::EnPassant) }
@@ -351,7 +390,8 @@ impl MoveList {
             return;
         }
 
-        let path = Bitboard::between(king_from, king_to).union(Bitboard::between(rook_from, rook_to));
+        let path =
+            Bitboard::between(king_from, king_to).union(Bitboard::between(rook_from, rook_to));
         if path
             .without(king_from)
             .without(rook_from)
@@ -396,14 +436,19 @@ impl MoveList {
         debug_assert!(C::COLOR as u8 == board.side_to_move() as u8);
         let king_square = board.king_square(C::COLOR);
         unsafe {
-            self.extend_piece_moves::<C, M>(board, king_square, king_attacks(king_square).diff(board.dangers()));
+            self.extend_piece_moves::<C, M>(
+                board,
+                king_square,
+                king_attacks(king_square).diff(board.dangers()),
+            );
         }
 
         let occupied = board.occupied();
         let pinned = board.pinned(C::COLOR);
         let target = match board.checkers().popcount() {
             0 => Bitboard::ALL,
-            1 => Bitboard::between(king_square, board.checkers().lsb().unwrap()).union(board.checkers()),
+            1 => Bitboard::between(king_square, board.checkers().lsb().unwrap())
+                .union(board.checkers()),
             _ => return,
         };
 
@@ -432,7 +477,9 @@ impl MoveList {
             }
             while let Some(from) = pinned_pieces.pop_lsb() {
                 let pin_mask = Bitboard::ray_pass(king_square, from);
-                let attacks = bishop_attacks(from, occupied).intersect(target).intersect(pin_mask);
+                let attacks = bishop_attacks(from, occupied)
+                    .intersect(target)
+                    .intersect(pin_mask);
                 self.extend_piece_moves::<C, M>(board, from, attacks);
             }
 
@@ -445,7 +492,9 @@ impl MoveList {
             }
             while let Some(from) = pinned_pieces.pop_lsb() {
                 let pin_mask = Bitboard::ray_pass(king_square, from);
-                let attacks = rook_attacks(from, occupied).intersect(target).intersect(pin_mask);
+                let attacks = rook_attacks(from, occupied)
+                    .intersect(target)
+                    .intersect(pin_mask);
                 self.extend_piece_moves::<C, M>(board, from, attacks);
             }
 
@@ -474,7 +523,7 @@ impl MoveList {
     /// # Examples
     ///
     /// ```
-    /// use chess::{mv::MoveList, mv::movegen::AllMoves, board::BoardBuilder};
+    /// use smolchess::{mv::MoveList, mv::movegen::AllMoves, board::BoardBuilder};
     ///
     /// let board = BoardBuilder::classical().build().unwrap();
     /// let moves = MoveList::new::<AllMoves>(&board);
@@ -505,7 +554,7 @@ impl MoveList {
     /// # Examples
     ///
     /// ```
-    /// use chess::{mv::MoveList, mv::movegen::Capture, board::BoardBuilder};
+    /// use smolchess::{mv::MoveList, mv::movegen::Capture, board::BoardBuilder};
     ///
     /// let mut board = BoardBuilder::classical().build().unwrap();
     /// let mut moves = MoveList::new::<Capture>(&board);
@@ -589,7 +638,7 @@ impl CoreBoard {
     /// # Examples
     ///
     /// ```
-    /// use chess::{mv::MoveList, board::BoardBuilder};
+    /// use smolchess::{mv::MoveList, board::BoardBuilder};
     ///
     /// let board = BoardBuilder::classical().build().unwrap();
     /// let moves = board.legal_moves();

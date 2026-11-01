@@ -13,7 +13,7 @@ use core::str::FromStr;
 /// # Examples
 ///
 /// ```
-/// use chess::Color;
+/// use smolchess::Color;
 ///
 /// let white = Color::White;
 /// let black = Color::Black;
@@ -34,7 +34,7 @@ impl Color {
     /// # Examples
     ///
     /// ```
-    /// use chess::Color;
+    /// use smolchess::Color;
     ///
     /// assert_eq!(Color::ALL.len(), 2);
     /// ```
@@ -45,7 +45,7 @@ impl Color {
     /// # Examples
     ///
     /// ```
-    /// use chess::Color;
+    /// use smolchess::Color;
     ///
     /// assert_eq!(Color::from_white(true), Color::White);
     /// assert_eq!(Color::from_white(false), Color::Black);
@@ -61,7 +61,7 @@ impl Color {
     /// # Examples
     ///
     /// ```
-    /// use chess::Color;
+    /// use smolchess::Color;
     ///
     /// assert_eq!(Color::from_black(true), Color::Black);
     /// assert_eq!(Color::from_black(false), Color::White);
@@ -90,7 +90,7 @@ impl Color {
     /// # Examples
     ///
     /// ```
-    /// use chess::Color;
+    /// use smolchess::Color;
     ///
     /// assert_eq!(Color::from_char('w'), Some(Color::White));
     /// assert_eq!(Color::from_char('b'), Some(Color::Black));
@@ -111,7 +111,7 @@ impl Color {
     /// # Examples
     ///
     /// ```
-    /// use chess::Color;
+    /// use smolchess::Color;
     ///
     /// assert_eq!(Color::White.other(), Color::Black);
     /// assert_eq!(Color::Black.other(), Color::White);
@@ -127,7 +127,7 @@ impl Color {
     /// # Examples
     ///
     /// ```
-    /// use chess::Color;
+    /// use smolchess::Color;
     ///
     /// assert_eq!(Color::White.to_char(), 'w');
     /// assert_eq!(Color::Black.to_char(), 'b');
@@ -146,7 +146,7 @@ impl Color {
     /// # Examples
     ///
     /// ```
-    /// use chess::{Color, Piece};
+    /// use smolchess::{Color, Piece};
     ///
     /// assert_eq!(Color::White.pawn(), Piece::WhitePawn);
     /// assert_eq!(Color::Black.pawn(), Piece::BlackPawn);
@@ -162,7 +162,7 @@ impl Color {
     /// # Examples
     ///
     /// ```
-    /// use chess::{Color, Piece};
+    /// use smolchess::{Color, Piece};
     ///
     /// assert_eq!(Color::White.knight(), Piece::WhiteKnight);
     /// assert_eq!(Color::Black.knight(), Piece::BlackKnight);
@@ -178,7 +178,7 @@ impl Color {
     /// # Examples
     ///
     /// ```
-    /// use chess::{Color, Piece};
+    /// use smolchess::{Color, Piece};
     ///
     /// assert_eq!(Color::White.bishop(), Piece::WhiteBishop);
     /// assert_eq!(Color::Black.bishop(), Piece::BlackBishop);
@@ -194,7 +194,7 @@ impl Color {
     /// # Examples
     ///
     /// ```
-    /// use chess::{Color, Piece};
+    /// use smolchess::{Color, Piece};
     ///
     /// assert_eq!(Color::White.rook(), Piece::WhiteRook);
     /// assert_eq!(Color::Black.rook(), Piece::BlackRook);
@@ -210,7 +210,7 @@ impl Color {
     /// # Examples
     ///
     /// ```
-    /// use chess::{Color, Piece};
+    /// use smolchess::{Color, Piece};
     ///
     /// assert_eq!(Color::White.queen(), Piece::WhiteQueen);
     /// assert_eq!(Color::Black.queen(), Piece::BlackQueen);
@@ -226,7 +226,7 @@ impl Color {
     /// # Examples
     ///
     /// ```
-    /// use chess::{Color, Piece};
+    /// use smolchess::{Color, Piece};
     ///
     /// assert_eq!(Color::White.king(), Piece::WhiteKing);
     /// assert_eq!(Color::Black.king(), Piece::BlackKing);
@@ -242,7 +242,7 @@ impl Color {
     /// # Examples
     ///
     /// ```
-    /// use chess::Color;
+    /// use smolchess::Color;
     ///
     /// let mut color = Color::White;
     /// color.flip();
@@ -291,7 +291,7 @@ impl_try_from_int_for_enum!(Color => i8, u8, i16, u16, i32, u32, i64, u64, i128,
 /// # Examples
 ///
 /// ```
-/// use chess::PieceKind;
+/// use smolchess::PieceKind;
 ///
 /// let king = PieceKind::King;
 /// let pawn = PieceKind::Pawn;
@@ -316,7 +316,7 @@ impl PieceKind {
     /// # Examples
     ///
     /// ```
-    /// use chess::PieceKind;
+    /// use smolchess::PieceKind;
     ///
     /// assert_eq!(PieceKind::ALL.len(), 6);
     /// ```
@@ -339,7 +339,7 @@ impl PieceKind {
     /// # Examples
     ///
     /// ```
-    /// use chess::PieceKind;
+    /// use smolchess::PieceKind;
     ///
     /// assert_eq!(PieceKind::from_u8(0), Some(PieceKind::Pawn));
     /// assert_eq!(PieceKind::from_u8(5), Some(PieceKind::King));
@@ -365,7 +365,7 @@ impl PieceKind {
     /// # Examples
     ///
     /// ```
-    /// use chess::PieceKind;
+    /// use smolchess::PieceKind;
     ///
     /// // Safe usage
     /// unsafe {
@@ -394,7 +394,7 @@ impl PieceKind {
     /// # Examples
     ///
     /// ```
-    /// use chess::PieceKind;
+    /// use smolchess::PieceKind;
     ///
     /// assert_eq!(PieceKind::from_char('P'), Some(PieceKind::Pawn));
     /// assert_eq!(PieceKind::from_char('p'), Some(PieceKind::Pawn));
@@ -420,7 +420,7 @@ impl PieceKind {
     /// # Examples
     ///
     /// ```
-    /// use chess::PieceKind;
+    /// use smolchess::PieceKind;
     ///
     /// assert_eq!(PieceKind::Pawn.to_lower_char(), 'p');
     /// assert_eq!(PieceKind::Knight.to_lower_char(), 'n');
@@ -444,7 +444,7 @@ impl PieceKind {
     /// # Examples
     ///
     /// ```
-    /// use chess::PieceKind;
+    /// use smolchess::PieceKind;
     ///
     /// assert_eq!(PieceKind::Pawn.to_upper_char(), 'P');
     /// assert_eq!(PieceKind::Knight.to_upper_char(), 'N');
@@ -468,7 +468,7 @@ impl PieceKind {
     /// # Examples
     ///
     /// ```
-    /// use chess::{PieceKind, Piece};
+    /// use smolchess::{PieceKind, Piece};
     ///
     /// assert_eq!(PieceKind::Pawn.white(), Piece::WhitePawn);
     /// assert_eq!(PieceKind::King.white(), Piece::WhiteKing);
@@ -484,7 +484,7 @@ impl PieceKind {
     /// # Examples
     ///
     /// ```
-    /// use chess::{PieceKind, Piece};
+    /// use smolchess::{PieceKind, Piece};
     ///
     /// assert_eq!(PieceKind::Pawn.black(), Piece::BlackPawn);
     /// assert_eq!(PieceKind::King.black(), Piece::BlackKing);
@@ -531,7 +531,7 @@ impl_try_from_int_for_enum!(PieceKind => i8, u8, i16, u16, i32, u32, i64, u64, i
 /// # Examples
 ///
 /// ```
-/// use chess::Piece;
+/// use smolchess::Piece;
 ///
 /// let white_pawn = Piece::WhitePawn;
 /// let black_king = Piece::BlackKing;
@@ -557,7 +557,7 @@ impl Piece {
     /// # Examples
     ///
     /// ```
-    /// use chess::Piece;
+    /// use smolchess::Piece;
     ///
     /// assert_eq!(Piece::ALL.len(), 12);
     /// ```
@@ -581,7 +581,7 @@ impl Piece {
     /// # Examples
     ///
     /// ```
-    /// use chess::{Piece, Color, PieceKind};
+    /// use smolchess::{Piece, Color, PieceKind};
     ///
     /// let white_pawn = Piece::new(Color::White, PieceKind::Pawn);
     /// let black_king = Piece::new(Color::Black, PieceKind::King);
@@ -602,7 +602,7 @@ impl Piece {
     /// # Examples
     ///
     /// ```
-    /// use chess::Piece;
+    /// use smolchess::Piece;
     ///
     /// assert_eq!(Piece::from_u8(0), Some(Piece::WhitePawn));
     /// assert_eq!(Piece::from_u8(11), Some(Piece::BlackKing));
@@ -628,7 +628,7 @@ impl Piece {
     /// # Examples
     ///
     /// ```
-    /// use chess::Piece;
+    /// use smolchess::Piece;
     ///
     /// // Safe usage
     /// unsafe {
@@ -653,7 +653,7 @@ impl Piece {
     /// # Examples
     ///
     /// ```
-    /// use chess::Piece;
+    /// use smolchess::Piece;
     ///
     /// assert_eq!(Piece::from_char('P'), Some(Piece::WhitePawn));
     /// assert_eq!(Piece::from_char('p'), Some(Piece::BlackPawn));
@@ -687,7 +687,7 @@ impl Piece {
     /// # Examples
     ///
     /// ```
-    /// use chess::Piece;
+    /// use smolchess::Piece;
     ///
     /// assert_eq!(Piece::WhitePawn.to_char(), 'P');
     /// assert_eq!(Piece::BlackPawn.to_char(), 'p');
@@ -717,7 +717,7 @@ impl Piece {
     /// # Examples
     ///
     /// ```
-    /// use chess::{Piece, Color};
+    /// use smolchess::{Piece, Color};
     ///
     /// assert_eq!(Piece::WhitePawn.color(), Color::White);
     /// assert_eq!(Piece::BlackKing.color(), Color::Black);
@@ -733,7 +733,7 @@ impl Piece {
     /// # Examples
     ///
     /// ```
-    /// use chess::{Piece, PieceKind};
+    /// use smolchess::{Piece, PieceKind};
     ///
     /// assert_eq!(Piece::WhitePawn.kind(), PieceKind::Pawn);
     /// assert_eq!(Piece::BlackKing.kind(), PieceKind::King);

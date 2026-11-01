@@ -19,7 +19,7 @@ use crate::{
 /// # Examples
 ///
 /// ```
-/// use chess::mv::PieceChangesBuffer;
+/// use smolchess::mv::PieceChangesBuffer;
 ///
 /// let buffer = PieceChangesBuffer::new();
 /// assert!(buffer.put().is_empty());
@@ -37,7 +37,7 @@ impl PieceChangesBuffer {
     /// # Examples
     ///
     /// ```
-    /// use chess::mv::PieceChangesBuffer;
+    /// use smolchess::mv::PieceChangesBuffer;
     ///
     /// let buffer = PieceChangesBuffer::new();
     /// ```
@@ -53,7 +53,7 @@ impl PieceChangesBuffer {
     /// # Examples
     ///
     /// ```
-    /// use chess::mv::PieceChangesBuffer;
+    /// use smolchess::mv::PieceChangesBuffer;
     ///
     /// let mut buffer = PieceChangesBuffer::new();
     /// buffer.clear();
@@ -72,7 +72,7 @@ impl PieceChangesBuffer {
     /// # Examples
     ///
     /// ```
-    /// use chess::mv::PieceChangesBuffer;
+    /// use smolchess::mv::PieceChangesBuffer;
     ///
     /// let buffer = PieceChangesBuffer::new();
     /// assert!(buffer.put().is_empty());
@@ -90,7 +90,7 @@ impl PieceChangesBuffer {
     /// # Examples
     ///
     /// ```
-    /// use chess::mv::PieceChangesBuffer;
+    /// use smolchess::mv::PieceChangesBuffer;
     ///
     /// let buffer = PieceChangesBuffer::new();
     /// assert!(buffer.remove().is_empty());
@@ -481,7 +481,7 @@ impl Board {
     /// # Examples
     ///
     /// ```
-    /// use chess::{Square, mv::{Move, MoveKind, PieceChangesBuffer}, board::{Board, BoardBuilder}};
+    /// use smolchess::{Square, mv::{Move, MoveKind, PieceChangesBuffer}, board::{Board, BoardBuilder}};
     ///
     /// let core = BoardBuilder::classical().build().unwrap();
     /// let mut board = Board::new(core);
@@ -515,7 +515,7 @@ impl Board {
     /// # Examples
     ///
     /// ```
-    /// use chess::{Square, mv::{Move, MoveKind}, board::{Board, BoardBuilder}};
+    /// use smolchess::{Square, mv::{Move, MoveKind}, board::{Board, BoardBuilder}};
     ///
     /// let core = BoardBuilder::classical().build().unwrap();
     /// let mut board = Board::new(core);
@@ -547,7 +547,7 @@ impl Board {
     /// # Examples
     ///
     /// ```
-    /// use chess::{Square, mv::{Move, MoveKind}, board::{Board, BoardBuilder}};
+    /// use smolchess::{Square, mv::{Move, MoveKind}, board::{Board, BoardBuilder}};
     ///
     /// let core = BoardBuilder::classical().build().unwrap();
     /// let mut board = Board::new(core);
@@ -583,7 +583,7 @@ impl Board {
     /// # Examples
     ///
     /// ```
-    /// use chess::{Square, mv::{Move, MoveKind, PieceChangesBuffer}, board::{Board, BoardBuilder}};
+    /// use smolchess::{Square, mv::{Move, MoveKind, PieceChangesBuffer}, board::{Board, BoardBuilder}};
     ///
     /// let core = BoardBuilder::classical().build().unwrap();
     /// let mut board = Board::new(core);
@@ -614,7 +614,7 @@ impl Board {
     /// # Examples
     ///
     /// ```
-    /// use chess::{Square, mv::{Move, MoveKind}, board::{Board, BoardBuilder}};
+    /// use smolchess::{Square, mv::{Move, MoveKind}, board::{Board, BoardBuilder}};
     ///
     /// let core = BoardBuilder::classical().build().unwrap();
     /// let mut board = Board::new(core);
@@ -642,7 +642,7 @@ impl Board {
     /// # Examples
     ///
     /// ```
-    /// use chess::{Square, mv::{Move, MoveKind}, board::{Board, BoardBuilder}};
+    /// use smolchess::{Square, mv::{Move, MoveKind}, board::{Board, BoardBuilder}};
     ///
     /// let core = BoardBuilder::classical().build().unwrap();
     /// let mut board = Board::new(core);

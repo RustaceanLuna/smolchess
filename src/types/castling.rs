@@ -10,7 +10,7 @@ use core::fmt::{self, Binary, Debug, Display, Write};
 /// # Examples
 ///
 /// ```
-/// use chess::CastlingSide;
+/// use smolchess::CastlingSide;
 ///
 /// let kingside = CastlingSide::Kingside;
 /// let queenside = CastlingSide::Queenside;
@@ -31,7 +31,7 @@ impl CastlingSide {
     /// # Examples
     ///
     /// ```
-    /// use chess::CastlingSide;
+    /// use smolchess::CastlingSide;
     ///
     /// assert_eq!(CastlingSide::ALL.len(), 2);
     /// ```
@@ -42,7 +42,7 @@ impl CastlingSide {
     /// # Examples
     ///
     /// ```
-    /// use chess::CastlingSide;
+    /// use smolchess::CastlingSide;
     ///
     /// assert_eq!(CastlingSide::kingside(true), CastlingSide::Kingside);
     /// assert_eq!(CastlingSide::kingside(false), CastlingSide::Queenside);
@@ -50,7 +50,11 @@ impl CastlingSide {
     #[inline]
     #[must_use]
     pub const fn kingside(is_kingside: bool) -> Self {
-        if is_kingside { Self::Kingside } else { Self::Queenside }
+        if is_kingside {
+            Self::Kingside
+        } else {
+            Self::Queenside
+        }
     }
 
     /// Returns `Queenside` if `is_queenside` is true, otherwise returns `Kingside`.
@@ -58,7 +62,7 @@ impl CastlingSide {
     /// # Examples
     ///
     /// ```
-    /// use chess::CastlingSide;
+    /// use smolchess::CastlingSide;
     ///
     /// assert_eq!(CastlingSide::queenside(true), CastlingSide::Queenside);
     /// assert_eq!(CastlingSide::queenside(false), CastlingSide::Kingside);
@@ -66,7 +70,11 @@ impl CastlingSide {
     #[inline]
     #[must_use]
     pub const fn queenside(is_queenside: bool) -> Self {
-        if is_queenside { Self::Queenside } else { Self::Kingside }
+        if is_queenside {
+            Self::Queenside
+        } else {
+            Self::Kingside
+        }
     }
 
     const fn from_u8(value: u8) -> Option<Self> {
@@ -82,7 +90,7 @@ impl CastlingSide {
     /// # Examples
     ///
     /// ```
-    /// use chess::CastlingSide;
+    /// use smolchess::CastlingSide;
     ///
     /// assert_eq!(CastlingSide::Kingside.other(), CastlingSide::Queenside);
     /// assert_eq!(CastlingSide::Queenside.other(), CastlingSide::Kingside);
@@ -101,7 +109,7 @@ impl CastlingSide {
     /// # Examples
     ///
     /// ```
-    /// use chess::{CastlingSide, File};
+    /// use smolchess::{CastlingSide, File};
     ///
     /// assert_eq!(CastlingSide::Kingside.king_to_file(), File::G);
     /// assert_eq!(CastlingSide::Queenside.king_to_file(), File::C);
@@ -120,7 +128,7 @@ impl CastlingSide {
     /// # Examples
     ///
     /// ```
-    /// use chess::{CastlingSide, File};
+    /// use smolchess::{CastlingSide, File};
     ///
     /// assert_eq!(CastlingSide::Kingside.rook_to_file(), File::F);
     /// assert_eq!(CastlingSide::Queenside.rook_to_file(), File::D);
@@ -151,7 +159,7 @@ impl_try_from_int_for_enum!(CastlingSide => i8, u8, i16, u16, i32, u32, i64, u64
 /// # Examples
 ///
 /// ```
-/// use chess::{CastlingRights, Color, CastlingSide, File};
+/// use smolchess::{CastlingRights, Color, CastlingSide, File};
 ///
 /// // Create castling rights with standard starting position
 /// let rights = CastlingRights::new(
@@ -171,7 +179,7 @@ impl CastlingRights {
     /// # Examples
     ///
     /// ```
-    /// use chess::CastlingRights;
+    /// use smolchess::CastlingRights;
     ///
     /// assert_eq!(CastlingRights::NONE, CastlingRights::new(None, None, None, None));
     /// ```
@@ -192,7 +200,7 @@ impl CastlingRights {
     /// # Examples
     ///
     /// ```
-    /// use chess::{CastlingRights, Color, CastlingSide, File};
+    /// use smolchess::{CastlingRights, Color, CastlingSide, File};
     ///
     /// // Standard starting position
     /// let rights = CastlingRights::new(
@@ -242,7 +250,7 @@ impl CastlingRights {
     /// # Examples
     ///
     /// ```
-    /// use chess::{CastlingRights, Color, CastlingSide, File};
+    /// use smolchess::{CastlingRights, Color, CastlingSide, File};
     ///
     /// let rights = CastlingRights::new(
     ///     Some(File::H), Some(File::A), None, None,
@@ -265,7 +273,7 @@ impl CastlingRights {
     /// # Examples
     ///
     /// ```
-    /// use chess::{CastlingRights, Color, CastlingSide, File};
+    /// use smolchess::{CastlingRights, Color, CastlingSide, File};
     ///
     /// let rights = CastlingRights::new(
     ///     Some(File::H), Some(File::A), None, None,
@@ -300,7 +308,7 @@ impl CastlingRights {
     /// # Examples
     ///
     /// ```
-    /// use chess::{CastlingRights, Color, CastlingSide, File};
+    /// use smolchess::{CastlingRights, Color, CastlingSide, File};
     ///
     /// let mut rights = CastlingRights::NONE;
     /// rights.set(Color::White, CastlingSide::Kingside, File::H);
@@ -329,7 +337,7 @@ impl CastlingRights {
     /// # Examples
     ///
     /// ```
-    /// use chess::{CastlingRights, Color, CastlingSide, File};
+    /// use smolchess::{CastlingRights, Color, CastlingSide, File};
     ///
     /// let mut rights = CastlingRights::new(
     ///     Some(File::H), Some(File::A), None, None,
@@ -362,7 +370,7 @@ impl CastlingRights {
     /// # Examples
     ///
     /// ```
-    /// use chess::{CastlingRights, Color, CastlingSide, File};
+    /// use smolchess::{CastlingRights, Color, CastlingSide, File};
     ///
     /// let mut rights = CastlingRights::new(
     ///     Some(File::H), Some(File::A), None, None,

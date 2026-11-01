@@ -34,7 +34,7 @@ const KING_ATTACKS: AttacksTable = build_leaping_attacks(&[1, 7, 8, 9, -1, -7, -
 /// # Examples
 ///
 /// ```
-/// use chess::{Square, Color, attacks::pawn_attacks};
+/// use smolchess::{Square, Color, attacks::pawn_attacks};
 ///
 /// let attacks = pawn_attacks(Square::E4, Color::White);
 /// assert!(attacks.get(Square::D5) || attacks.get(Square::F5));
@@ -62,7 +62,7 @@ pub const fn pawn_attacks(square: Square, color: Color) -> Bitboard {
 /// # Examples
 ///
 /// ```
-/// use chess::{Square, Color, Bitboard, attacks::pawn_attacks_bb};
+/// use smolchess::{Square, Color, Bitboard, attacks::pawn_attacks_bb};
 ///
 /// let pawns = Bitboard::from_square(Square::E4);
 /// let attacks = pawn_attacks_bb(pawns, Color::White);
@@ -97,7 +97,7 @@ pub const fn pawn_attacks_bb(bitboard: Bitboard, color: Color) -> Bitboard {
 /// # Examples
 ///
 /// ```
-/// use chess::{Square, attacks::knight_attacks};
+/// use smolchess::{Square, attacks::knight_attacks};
 ///
 /// let attacks = knight_attacks(Square::E4);
 /// assert_eq!(attacks.popcount(), 8);
@@ -121,7 +121,7 @@ pub const fn knight_attacks(square: Square) -> Bitboard {
 /// # Examples
 ///
 /// ```
-/// use chess::{Square, attacks::king_attacks};
+/// use smolchess::{Square, attacks::king_attacks};
 ///
 /// let attacks = king_attacks(Square::E4);
 /// assert_eq!(attacks.popcount(), 8);

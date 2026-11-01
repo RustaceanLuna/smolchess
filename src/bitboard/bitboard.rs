@@ -12,7 +12,7 @@ use core::ops::{BitAnd, BitAndAssign, BitOr, BitOrAssign, BitXor, BitXorAssign, 
 /// # Examples
 ///
 /// ```
-/// use chess::{Square, Bitboard};
+/// use smolchess::{Square, Bitboard};
 ///
 /// let bb = Bitboard::from_square(Square::E4);
 /// assert!(bb.get(Square::E4));
@@ -48,7 +48,7 @@ impl Bitboard {
     /// # Examples
     ///
     /// ```
-    /// use chess::Bitboard;
+    /// use smolchess::Bitboard;
     ///
     /// let bb = Bitboard::new(0b1);
     /// ```
@@ -71,7 +71,7 @@ impl Bitboard {
     /// # Examples
     ///
     /// ```
-    /// use chess::{Square, Bitboard};
+    /// use smolchess::{Square, Bitboard};
     ///
     /// let bb = Bitboard::from_square(Square::E4);
     /// ```
@@ -94,7 +94,7 @@ impl Bitboard {
     /// # Examples
     ///
     /// ```
-    /// use chess::{File, Bitboard};
+    /// use smolchess::{File, Bitboard};
     ///
     /// let bb = Bitboard::from_file(File::E);
     /// ```
@@ -117,7 +117,7 @@ impl Bitboard {
     /// # Examples
     ///
     /// ```
-    /// use chess::{Rank, Bitboard};
+    /// use smolchess::{Rank, Bitboard};
     ///
     /// let bb = Bitboard::from_rank(Rank::R4);
     /// ```
@@ -136,7 +136,7 @@ impl Bitboard {
     /// # Examples
     ///
     /// ```
-    /// use chess::Bitboard;
+    /// use smolchess::Bitboard;
     ///
     /// assert!(Bitboard::EMPTY.is_empty());
     /// assert!(!Bitboard::ALL.is_empty());
@@ -156,7 +156,7 @@ impl Bitboard {
     /// # Examples
     ///
     /// ```
-    /// use chess::Bitboard;
+    /// use smolchess::Bitboard;
     ///
     /// let flipped = Bitboard::EMPTY.flip();
     /// assert_eq!(flipped, Bitboard::ALL);
@@ -183,7 +183,7 @@ impl Bitboard {
     /// # Examples
     ///
     /// ```
-    /// use chess::{Square, Bitboard};
+    /// use smolchess::{Square, Bitboard};
     ///
     /// let bb1 = Bitboard::from_square(Square::E4);
     /// let bb2 = Bitboard::from_rank(Square::E4.rank());
@@ -212,7 +212,7 @@ impl Bitboard {
     /// # Examples
     ///
     /// ```
-    /// use chess::{Square, Bitboard};
+    /// use smolchess::{Square, Bitboard};
     ///
     /// let bb1 = Bitboard::from_square(Square::E4);
     /// let bb2 = Bitboard::from_square(Square::D4);
@@ -241,7 +241,7 @@ impl Bitboard {
     /// # Examples
     ///
     /// ```
-    /// use chess::{Square, Bitboard};
+    /// use smolchess::{Square, Bitboard};
     ///
     /// let bb1 = Bitboard::from_rank(Square::E4.rank());
     /// let bb2 = Bitboard::from_square(Square::E4);
@@ -270,7 +270,7 @@ impl Bitboard {
     /// # Examples
     ///
     /// ```
-    /// use chess::{Square, Bitboard};
+    /// use smolchess::{Square, Bitboard};
     ///
     /// let bb1 = Bitboard::from_square(Square::E4);
     /// let bb2 = Bitboard::from_square(Square::D4);
@@ -292,7 +292,7 @@ impl Bitboard {
     /// # Examples
     ///
     /// ```
-    /// use chess::{Square, Bitboard};
+    /// use smolchess::{Square, Bitboard};
     ///
     /// let mut bb1 = Bitboard::from_rank(Square::E4.rank());
     /// let bb2 = Bitboard::from_square(Square::E4);
@@ -312,7 +312,7 @@ impl Bitboard {
     /// # Examples
     ///
     /// ```
-    /// use chess::{Square, Bitboard};
+    /// use smolchess::{Square, Bitboard};
     ///
     /// let mut bb1 = Bitboard::from_square(Square::E4);
     /// let bb2 = Bitboard::from_square(Square::D4);
@@ -332,7 +332,7 @@ impl Bitboard {
     /// # Examples
     ///
     /// ```
-    /// use chess::{Square, Bitboard};
+    /// use smolchess::{Square, Bitboard};
     ///
     /// let mut bb1 = Bitboard::from_rank(Square::E4.rank());
     /// let bb2 = Bitboard::from_square(Square::E4);
@@ -352,7 +352,7 @@ impl Bitboard {
     /// # Examples
     ///
     /// ```
-    /// use chess::{Square, Bitboard};
+    /// use smolchess::{Square, Bitboard};
     ///
     /// let mut bb1 = Bitboard::from_square(Square::E4);
     /// let bb2 = Bitboard::from_square(Square::D4);
@@ -379,7 +379,7 @@ impl Bitboard {
     /// # Examples
     ///
     /// ```
-    /// use chess::{Square, Bitboard};
+    /// use smolchess::{Square, Bitboard};
     ///
     /// let bb = Bitboard::from_square(Square::E4);
     /// let shifted = bb.shift(1);
@@ -406,7 +406,7 @@ impl Bitboard {
     /// # Examples
     ///
     /// ```
-    /// use chess::{Square, Bitboard};
+    /// use smolchess::{Square, Bitboard};
     ///
     /// let bb = Bitboard::from_square(Square::E4);
     /// assert!(bb.get(Square::E4));
@@ -431,7 +431,7 @@ impl Bitboard {
     /// # Examples
     ///
     /// ```
-    /// use chess::{Square, Bitboard};
+    /// use smolchess::{Square, Bitboard};
     ///
     /// let bb = Bitboard::EMPTY.with(Square::E4);
     /// assert!(bb.get(Square::E4));
@@ -455,7 +455,7 @@ impl Bitboard {
     /// # Examples
     ///
     /// ```
-    /// use chess::{Square, Bitboard};
+    /// use smolchess::{Square, Bitboard};
     ///
     /// let bb = Bitboard::from_square(Square::E4);
     /// let cleared = bb.without(Square::E4);
@@ -480,7 +480,7 @@ impl Bitboard {
     /// # Examples
     ///
     /// ```
-    /// use chess::{Square, Bitboard};
+    /// use smolchess::{Square, Bitboard};
     ///
     /// let bb = Bitboard::EMPTY.toggled(Square::E4);
     /// assert!(bb.get(Square::E4));
@@ -502,7 +502,7 @@ impl Bitboard {
     /// # Examples
     ///
     /// ```
-    /// use chess::{Square, Bitboard};
+    /// use smolchess::{Square, Bitboard};
     ///
     /// let mut bb = Bitboard::EMPTY;
     /// bb.set(Square::E4);
@@ -522,7 +522,7 @@ impl Bitboard {
     /// # Examples
     ///
     /// ```
-    /// use chess::{Square, Bitboard};
+    /// use smolchess::{Square, Bitboard};
     ///
     /// let mut bb = Bitboard::from_square(Square::E4);
     /// bb.clear(Square::E4);
@@ -542,7 +542,7 @@ impl Bitboard {
     /// # Examples
     ///
     /// ```
-    /// use chess::{Square, Bitboard};
+    /// use smolchess::{Square, Bitboard};
     ///
     /// let mut bb = Bitboard::EMPTY;
     /// bb.toggle(Square::E4);
@@ -562,7 +562,7 @@ impl Bitboard {
     /// # Examples
     ///
     /// ```
-    /// use chess::{Square, Bitboard};
+    /// use smolchess::{Square, Bitboard};
     ///
     /// let bb = Bitboard::from_square(Square::E4);
     /// assert_eq!(bb.lsb(), Some(Square::E4));
@@ -583,7 +583,7 @@ impl Bitboard {
     /// # Examples
     ///
     /// ```
-    /// use chess::{Square, Bitboard};
+    /// use smolchess::{Square, Bitboard};
     ///
     /// let bb = Bitboard::from_square(Square::E4);
     /// assert_eq!(bb.msb(), Some(Square::E4));
@@ -606,7 +606,7 @@ impl Bitboard {
     /// # Examples
     ///
     /// ```
-    /// use chess::{Square, Bitboard};
+    /// use smolchess::{Square, Bitboard};
     ///
     /// let mut bb = Bitboard::from_square(Square::E4);
     /// assert_eq!(bb.pop_lsb(), Some(Square::E4));
@@ -633,7 +633,7 @@ impl Bitboard {
     /// # Examples
     ///
     /// ```
-    /// use chess::{Square, Bitboard};
+    /// use smolchess::{Square, Bitboard};
     ///
     /// let mut bb = Bitboard::from_square(Square::E4);
     /// assert_eq!(bb.pop_msb(), Some(Square::E4));
@@ -658,7 +658,7 @@ impl Bitboard {
     /// # Examples
     ///
     /// ```
-    /// use chess::{Square, Bitboard};
+    /// use smolchess::{Square, Bitboard};
     ///
     /// let bb = Bitboard::from_square(Square::E4).union(Bitboard::from_square(Square::D4));
     /// assert_eq!(bb.popcount(), 2);
@@ -678,7 +678,7 @@ impl Bitboard {
     /// # Examples
     ///
     /// ```
-    /// use chess::{Square, Bitboard};
+    /// use smolchess::{Square, Bitboard};
     ///
     /// let bb = Bitboard::from_square(Square::E2);
     /// let flipped = bb.flip_vertical();
@@ -699,7 +699,7 @@ impl Bitboard {
     /// # Examples
     ///
     /// ```
-    /// use chess::{Square, Bitboard};
+    /// use smolchess::{Square, Bitboard};
     ///
     /// let bb = Bitboard::from_square(Square::D4);
     /// let flipped = bb.flip_horizontal();
@@ -727,7 +727,7 @@ impl Bitboard {
     /// # Examples
     ///
     /// ```
-    /// use chess::{Square, Bitboard, Color};
+    /// use smolchess::{Square, Bitboard, Color};
     ///
     /// let bb = Bitboard::from_square(Square::E2);
     /// let relative = bb.relative(Color::Black);
@@ -751,7 +751,7 @@ impl Bitboard {
     /// # Examples
     ///
     /// ```
-    /// use chess::{Square, Bitboard};
+    /// use smolchess::{Square, Bitboard};
     ///
     /// let bb = Bitboard::from_square(Square::E4).union(Bitboard::from_square(Square::D4));
     /// for subset in bb.subsets() {
@@ -864,7 +864,11 @@ impl Display for Bitboard {
                 f.write_char(' ')?;
             }
             for file in File::ALL {
-                let ch = if self.get(Square::new(file, rank)) { 'X' } else { '.' };
+                let ch = if self.get(Square::new(file, rank)) {
+                    'X'
+                } else {
+                    '.'
+                };
                 f.write_char(ch)?;
 
                 if file != File::H {
@@ -930,7 +934,7 @@ impl Square {
 /// # Examples
 ///
 /// ```
-/// use chess::{Square, Bitboard};
+/// use smolchess::{Square, Bitboard};
 ///
 /// let bb = Bitboard::from_square(Square::E4);
 /// for subset in bb.subsets() {

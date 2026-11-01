@@ -13,7 +13,7 @@ use core::str::FromStr;
 /// # Examples
 ///
 /// ```
-/// use chess::File;
+/// use smolchess::File;
 ///
 /// let a_file = File::A;
 /// let h_file = File::H;
@@ -32,7 +32,7 @@ impl File {
     /// # Examples
     ///
     /// ```
-    /// use chess::File;
+    /// use smolchess::File;
     ///
     /// assert_eq!(File::ALL.len(), 8);
     /// ```
@@ -49,7 +49,7 @@ impl File {
     /// # Examples
     ///
     /// ```
-    /// use chess::File;
+    /// use smolchess::File;
     ///
     /// assert_eq!(File::from_u8(0), Some(File::A));
     /// assert_eq!(File::from_u8(7), Some(File::H));
@@ -75,7 +75,7 @@ impl File {
     /// # Examples
     ///
     /// ```
-    /// use chess::File;
+    /// use smolchess::File;
     ///
     /// // Safe usage
     /// unsafe {
@@ -101,7 +101,7 @@ impl File {
     /// # Examples
     ///
     /// ```
-    /// use chess::File;
+    /// use smolchess::File;
     ///
     /// assert_eq!(File::from_char('a'), Some(File::A));
     /// assert_eq!(File::from_char('A'), Some(File::A));
@@ -124,7 +124,7 @@ impl File {
     /// # Examples
     ///
     /// ```
-    /// use chess::File;
+    /// use smolchess::File;
     ///
     /// assert_eq!(File::A.to_char(), 'a');
     /// assert_eq!(File::H.to_char(), 'h');
@@ -145,7 +145,7 @@ impl File {
     /// # Examples
     ///
     /// ```
-    /// use chess::File;
+    /// use smolchess::File;
     ///
     /// assert_eq!(File::D.shift(1), Some(File::E));
     /// assert_eq!(File::A.shift(-1), None);
@@ -177,7 +177,7 @@ impl File {
     /// # Examples
     ///
     /// ```
-    /// use chess::File;
+    /// use smolchess::File;
     ///
     /// // Safe usage
     /// unsafe {
@@ -221,7 +221,7 @@ impl_try_from_int_for_enum!(File => i8, u8, i16, u16, i32, u32, i64, u64, i128, 
 /// # Examples
 ///
 /// ```
-/// use chess::Rank;
+/// use smolchess::Rank;
 ///
 /// let rank1 = Rank::R1;
 /// let rank8 = Rank::R8;
@@ -240,7 +240,7 @@ impl Rank {
     /// # Examples
     ///
     /// ```
-    /// use chess::Rank;
+    /// use smolchess::Rank;
     ///
     /// assert_eq!(Rank::ALL.len(), 8);
     /// ```
@@ -257,7 +257,7 @@ impl Rank {
     /// # Examples
     ///
     /// ```
-    /// use chess::Rank;
+    /// use smolchess::Rank;
     ///
     /// assert_eq!(Rank::from_u8(0), Some(Rank::R1));
     /// assert_eq!(Rank::from_u8(7), Some(Rank::R8));
@@ -283,7 +283,7 @@ impl Rank {
     /// # Examples
     ///
     /// ```
-    /// use chess::Rank;
+    /// use smolchess::Rank;
     ///
     /// // Safe usage
     /// unsafe {
@@ -306,7 +306,7 @@ impl Rank {
     /// # Examples
     ///
     /// ```
-    /// use chess::Rank;
+    /// use smolchess::Rank;
     ///
     /// assert_eq!(Rank::from_char('1'), Some(Rank::R1));
     /// assert_eq!(Rank::from_char('8'), Some(Rank::R8));
@@ -328,7 +328,7 @@ impl Rank {
     /// # Examples
     ///
     /// ```
-    /// use chess::Rank;
+    /// use smolchess::Rank;
     ///
     /// assert_eq!(Rank::R1.to_char(), '1');
     /// assert_eq!(Rank::R8.to_char(), '8');
@@ -347,7 +347,7 @@ impl Rank {
     /// # Examples
     ///
     /// ```
-    /// use chess::{Rank, Color};
+    /// use smolchess::{Rank, Color};
     ///
     /// assert_eq!(Rank::R2.relative(Color::White), Rank::R2);
     /// assert_eq!(Rank::R2.relative(Color::Black), Rank::R7);
@@ -368,7 +368,7 @@ impl Rank {
     /// # Examples
     ///
     /// ```
-    /// use chess::Rank;
+    /// use smolchess::Rank;
     ///
     /// assert_eq!(Rank::R4.shift(1), Some(Rank::R5));
     /// assert_eq!(Rank::R1.shift(-1), None);
@@ -400,7 +400,7 @@ impl Rank {
     /// # Examples
     ///
     /// ```
-    /// use chess::Rank;
+    /// use smolchess::Rank;
     ///
     /// // Safe usage
     /// unsafe {
@@ -446,7 +446,7 @@ impl_try_from_int_for_enum!(Rank => i8, u8, i16, u16, i32, u32, i64, u64, i128, 
 /// # Examples
 ///
 /// ```
-/// use chess::Square;
+/// use smolchess::Square;
 ///
 /// let a1 = Square::A1;
 /// let e4 = Square::E4;
@@ -475,7 +475,7 @@ impl Square {
     /// # Examples
     ///
     /// ```
-    /// use chess::Square;
+    /// use smolchess::Square;
     ///
     /// assert_eq!(Square::ALL.len(), 64);
     /// ```
@@ -501,7 +501,7 @@ impl Square {
     /// # Examples
     ///
     /// ```
-    /// use chess::{Square, File, Rank};
+    /// use smolchess::{Square, File, Rank};
     ///
     /// let e4 = Square::new(File::E, Rank::R4);
     /// assert_eq!(e4, Square::E4);
@@ -522,7 +522,7 @@ impl Square {
     /// # Examples
     ///
     /// ```
-    /// use chess::Square;
+    /// use smolchess::Square;
     ///
     /// assert_eq!(Square::from_u8(0), Some(Square::A1));
     /// assert_eq!(Square::from_u8(63), Some(Square::H8));
@@ -548,7 +548,7 @@ impl Square {
     /// # Examples
     ///
     /// ```
-    /// use chess::Square;
+    /// use smolchess::Square;
     ///
     /// // Safe usage
     /// unsafe {
@@ -564,7 +564,7 @@ impl Square {
     /// # Examples
     ///
     /// ```
-    /// use chess::{Square, File};
+    /// use smolchess::{Square, File};
     ///
     /// assert_eq!(Square::E4.file(), File::E);
     /// assert_eq!(Square::A1.file(), File::A);
@@ -580,7 +580,7 @@ impl Square {
     /// # Examples
     ///
     /// ```
-    /// use chess::{Square, Rank};
+    /// use smolchess::{Square, Rank};
     ///
     /// assert_eq!(Square::E4.rank(), Rank::R4);
     /// assert_eq!(Square::A1.rank(), Rank::R1);
@@ -601,7 +601,7 @@ impl Square {
     /// # Examples
     ///
     /// ```
-    /// use chess::Square;
+    /// use smolchess::Square;
     ///
     /// assert_eq!(Square::E4.shift(1), Some(Square::F4));
     /// assert_eq!(Square::A1.shift(-1), None);
@@ -632,7 +632,7 @@ impl Square {
     /// # Examples
     ///
     /// ```
-    /// use chess::Square;
+    /// use smolchess::Square;
     ///
     /// // Safe usage
     /// unsafe {
@@ -653,7 +653,7 @@ impl Square {
     /// # Examples
     ///
     /// ```
-    /// use chess::{Square, Color};
+    /// use smolchess::{Square, Color};
     ///
     /// assert_eq!(Square::E2.forward(Color::White), Square::E3);
     /// assert_eq!(Square::E7.forward(Color::Black), Square::E6);
@@ -675,7 +675,7 @@ impl Square {
     /// # Examples
     ///
     /// ```
-    /// use chess::{Square, Color};
+    /// use smolchess::{Square, Color};
     ///
     /// assert_eq!(Square::E3.backward(Color::White), Square::E2);
     /// assert_eq!(Square::E6.backward(Color::Black), Square::E7);
@@ -695,7 +695,7 @@ impl Square {
     /// # Examples
     ///
     /// ```
-    /// use chess::{Square, Color};
+    /// use smolchess::{Square, Color};
     ///
     /// assert_eq!(Square::E4.relative(Color::White), Square::E4);
     /// assert_eq!(Square::E4.relative(Color::Black), Square::E5);

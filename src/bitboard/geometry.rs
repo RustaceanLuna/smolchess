@@ -38,7 +38,8 @@ static LINE: GeometryTable = {
         while let Some(b) = curr_b {
             curr_b = b.shift(1);
 
-            table[a as usize][b as usize] = RAY_PASS[a as usize][b as usize].union(RAY_PASS[b as usize][a as usize]);
+            table[a as usize][b as usize] =
+                RAY_PASS[a as usize][b as usize].union(RAY_PASS[b as usize][a as usize]);
         }
     }
 
@@ -82,7 +83,7 @@ impl Bitboard {
     /// # Examples
     ///
     /// ```
-    /// use chess::{Square, Bitboard};
+    /// use smolchess::{Square, Bitboard};
     ///
     /// let ray = Bitboard::ray_pass(Square::E2, Square::E5);
     /// ```
@@ -109,7 +110,7 @@ impl Bitboard {
     /// # Examples
     ///
     /// ```
-    /// use chess::{Square, Bitboard};
+    /// use smolchess::{Square, Bitboard};
     ///
     /// let line = Bitboard::line(Square::E2, Square::E5);
     /// ```
@@ -136,7 +137,7 @@ impl Bitboard {
     /// # Examples
     ///
     /// ```
-    /// use chess::{Square, Bitboard};
+    /// use smolchess::{Square, Bitboard};
     ///
     /// let between = Bitboard::between(Square::E2, Square::E5);
     /// assert!(between.get(Square::E3));
@@ -161,7 +162,7 @@ impl Bitboard {
     /// # Examples
     ///
     /// ```
-    /// use chess::{Square, Bitboard};
+    /// use smolchess::{Square, Bitboard};
     ///
     /// let diagonal = Bitboard::diagonal(Square::E4);
     /// assert!(diagonal.get(Square::E4));
@@ -190,7 +191,7 @@ impl Bitboard {
     /// # Examples
     ///
     /// ```
-    /// use chess::{Square, Bitboard};
+    /// use smolchess::{Square, Bitboard};
     ///
     /// let anti_diagonal = Bitboard::anti_diagonal(Square::E4);
     /// assert!(anti_diagonal.get(Square::E4));

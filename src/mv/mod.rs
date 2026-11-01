@@ -8,7 +8,7 @@
 /// # Examples
 ///
 /// ```
-/// use chess::{Square, mv::{Move, MoveKind}, board::BoardBuilder};
+/// use smolchess::{Square, mv::{Move, MoveKind}, board::BoardBuilder};
 ///
 /// let mut board = BoardBuilder::classical().build().unwrap();
 /// let mv = Move::new(Square::E2, Square::E4, MoveKind::DoublePush).unwrap();

@@ -1,5 +1,7 @@
 #[cfg(any(all(feature = "hyperbola", feature = "pext")))]
-compile_error!("Features 'hyperbola' and 'pext' are mutually exclusive. Please enable exactly one.");
+compile_error!(
+    "Features 'hyperbola' and 'pext' are mutually exclusive. Please enable exactly one."
+);
 
 #[cfg(feature = "hyperbola")]
 mod hyperbola;
@@ -60,7 +62,7 @@ pub use magic::*;
 /// # Examples
 ///
 /// ```
-/// use chess::{Square, Bitboard, attacks::queen_attacks};
+/// use smolchess::{Square, Bitboard, attacks::queen_attacks};
 ///
 /// let attacks = queen_attacks(Square::E4, Bitboard::EMPTY);
 /// assert!(!attacks.is_empty());
@@ -84,7 +86,7 @@ pub const fn queen_attacks(square: Square, occupied: Bitboard) -> Bitboard {
 /// # Examples
 ///
 /// ```
-/// use chess::{Square, Bitboard, Piece, PieceKind, Color, attacks::piece_attacks};
+/// use smolchess::{Square, Bitboard, Piece, PieceKind, Color, attacks::piece_attacks};
 ///
 /// let piece = Piece::new(Color::White, PieceKind::Knight);
 /// let attacks = piece_attacks(piece, Square::E4, Bitboard::EMPTY);

@@ -19,7 +19,7 @@ use crate::{Bitboard, CastlingSide, CoreBoard, PieceKind, Rank, Square};
 /// # Examples
 ///
 /// ```
-/// use chess::mv::MoveKind;
+/// use smolchess::mv::MoveKind;
 ///
 /// let quiet = MoveKind::Quiet;
 /// let capture = MoveKind::Capture;
@@ -60,7 +60,7 @@ impl MoveKind {
     /// # Examples
     ///
     /// ```
-    /// use chess::mv::MoveKind;
+    /// use smolchess::mv::MoveKind;
     ///
     /// assert_eq!(MoveKind::ALL.len(), 14);
     /// ```
@@ -91,7 +91,7 @@ impl MoveKind {
     /// # Examples
     ///
     /// ```
-    /// use chess::mv::MoveKind;
+    /// use smolchess::mv::MoveKind;
     ///
     /// assert_eq!(MoveKind::from_u8(0b0000), Some(MoveKind::Quiet));
     /// assert_eq!(MoveKind::from_u8(0b0110), None);
@@ -117,7 +117,7 @@ impl MoveKind {
     /// # Examples
     ///
     /// ```
-    /// use chess::mv::MoveKind;
+    /// use smolchess::mv::MoveKind;
     ///
     /// // Safe usage
     /// unsafe {
@@ -141,7 +141,7 @@ impl MoveKind {
     /// # Examples
     ///
     /// ```
-    /// use chess::{CastlingSide, mv::MoveKind};
+    /// use smolchess::{CastlingSide, mv::MoveKind};
     ///
     /// assert_eq!(MoveKind::from_castling(CastlingSide::Kingside), MoveKind::KingCastle);
     /// assert_eq!(MoveKind::from_castling(CastlingSide::Queenside), MoveKind::QueenCastle);
@@ -161,7 +161,7 @@ impl MoveKind {
     /// # Examples
     ///
     /// ```
-    /// use chess::{PieceKind, mv::MoveKind};
+    /// use smolchess::{PieceKind, mv::MoveKind};
     ///
     /// assert_eq!(MoveKind::from_promotion(PieceKind::Queen), MoveKind::QueenPromotion);
     /// assert_eq!(MoveKind::from_promotion(PieceKind::Knight), MoveKind::KnightPromotion);
@@ -181,7 +181,7 @@ impl MoveKind {
     /// # Examples
     ///
     /// ```
-    /// use chess::{PieceKind, mv::MoveKind};
+    /// use smolchess::{PieceKind, mv::MoveKind};
     ///
     /// assert_eq!(MoveKind::from_promo_capture(PieceKind::Queen), MoveKind::QueenPromoCapture);
     /// assert_eq!(MoveKind::from_promo_capture(PieceKind::Knight), MoveKind::KnightPromoCapture);
@@ -197,7 +197,7 @@ impl MoveKind {
     /// # Examples
     ///
     /// ```
-    /// use chess::mv::MoveKind;
+    /// use smolchess::mv::MoveKind;
     ///
     /// assert!(MoveKind::KingCastle.is_castling());
     /// assert!(MoveKind::QueenCastle.is_castling());
@@ -216,7 +216,7 @@ impl MoveKind {
     /// # Examples
     ///
     /// ```
-    /// use chess::mv::MoveKind;
+    /// use smolchess::mv::MoveKind;
     ///
     /// assert!(MoveKind::Capture.is_capture());
     /// assert!(MoveKind::EnPassant.is_capture());
@@ -236,7 +236,7 @@ impl MoveKind {
     /// # Examples
     ///
     /// ```
-    /// use chess::mv::MoveKind;
+    /// use smolchess::mv::MoveKind;
     ///
     /// assert!(MoveKind::QueenPromotion.is_promotion());
     /// assert!(MoveKind::QueenPromoCapture.is_promotion());
@@ -255,7 +255,7 @@ impl MoveKind {
     /// # Examples
     ///
     /// ```
-    /// use chess::mv::MoveKind;
+    /// use smolchess::mv::MoveKind;
     ///
     /// assert!(MoveKind::Capture.is_tactical());
     /// assert!(MoveKind::QueenPromotion.is_tactical());
@@ -277,7 +277,7 @@ impl MoveKind {
     /// # Examples
     ///
     /// ```
-    /// use chess::{CastlingSide, mv::MoveKind};
+    /// use smolchess::{CastlingSide, mv::MoveKind};
     ///
     /// assert_eq!(MoveKind::KingCastle.castling_side(), Some(CastlingSide::Kingside));
     /// assert_eq!(MoveKind::Quiet.castling_side(), None);
@@ -302,7 +302,7 @@ impl MoveKind {
     /// # Examples
     ///
     /// ```
-    /// use chess::{PieceKind, mv::MoveKind};
+    /// use smolchess::{PieceKind, mv::MoveKind};
     ///
     /// assert_eq!(MoveKind::QueenPromotion.promotion(), Some(PieceKind::Queen));
     /// assert_eq!(MoveKind::KnightPromoCapture.promotion(), Some(PieceKind::Knight));
@@ -341,7 +341,7 @@ impl_try_from_int_for_enum!(MoveKind => i8, u8, i16, u16, i32, u32, i64, u64, i1
 /// # Examples
 ///
 /// ```
-/// use chess::{Square, mv::{Move, MoveKind}};
+/// use smolchess::{Square, mv::{Move, MoveKind}};
 ///
 /// let mv = Move::new(Square::E2, Square::E4, MoveKind::DoublePush).unwrap();
 /// ```
@@ -366,7 +366,7 @@ impl Move {
     /// # Examples
     ///
     /// ```
-    /// use chess::{Square, mv::{Move, MoveKind}};
+    /// use smolchess::{Square, mv::{Move, MoveKind}};
     ///
     /// let mv = Move::new(Square::E2, Square::E4, MoveKind::DoublePush);
     /// assert!(mv.is_some());
@@ -400,7 +400,7 @@ impl Move {
     /// # Examples
     ///
     /// ```
-    /// use chess::{Square, mv::{Move, MoveKind}};
+    /// use smolchess::{Square, mv::{Move, MoveKind}};
     ///
     /// // Safe usage
     /// unsafe {
@@ -425,7 +425,7 @@ impl Move {
     /// # Examples
     ///
     /// ```
-    /// use chess::mv::Move;
+    /// use smolchess::mv::Move;
     ///
     /// // Safe usage
     /// unsafe {
@@ -441,7 +441,7 @@ impl Move {
     /// # Examples
     ///
     /// ```
-    /// use chess::{Square, mv::{Move, MoveKind}};
+    /// use smolchess::{Square, mv::{Move, MoveKind}};
     ///
     /// let mv = Move::new(Square::E2, Square::E4, MoveKind::DoublePush).unwrap();
     /// let value = mv.to_u16();
@@ -457,7 +457,7 @@ impl Move {
     /// # Examples
     ///
     /// ```
-    /// use chess::{Square, mv::{Move, MoveKind}};
+    /// use smolchess::{Square, mv::{Move, MoveKind}};
     ///
     /// let mv = Move::new(Square::E2, Square::E4, MoveKind::DoublePush).unwrap();
     /// assert_eq!(mv.from(), Square::E2);
@@ -475,7 +475,7 @@ impl Move {
     /// # Examples
     ///
     /// ```
-    /// use chess::{Square, mv::{Move, MoveKind}};
+    /// use smolchess::{Square, mv::{Move, MoveKind}};
     ///
     /// let mv = Move::new(Square::E2, Square::E4, MoveKind::DoublePush).unwrap();
     /// assert_eq!(mv.to(), Square::E4);
@@ -491,7 +491,7 @@ impl Move {
     /// # Examples
     ///
     /// ```
-    /// use chess::{Square, mv::{Move, MoveKind}};
+    /// use smolchess::{Square, mv::{Move, MoveKind}};
     ///
     /// let mv = Move::new(Square::E2, Square::E4, MoveKind::DoublePush).unwrap();
     /// assert_eq!(mv.kind(), MoveKind::DoublePush);
@@ -533,7 +533,8 @@ impl CoreBoard {
             _ => return Err(MoveError::InvalidMovingPiece),
         }
 
-        let path = Bitboard::between(king_square, king_to).union(Bitboard::between(rook_square, rook_to));
+        let path =
+            Bitboard::between(king_square, king_to).union(Bitboard::between(rook_square, rook_to));
         if !self
             .occupied()
             .without(king_square)
@@ -577,7 +578,7 @@ impl CoreBoard {
     /// # Examples
     ///
     /// ```
-    /// use chess::{Square, mv::{Move, MoveKind}, board::BoardBuilder};
+    /// use smolchess::{Square, mv::{Move, MoveKind}, board::BoardBuilder};
     ///
     /// let board = BoardBuilder::classical().build().unwrap();
     /// let mv = Move::new(Square::E2, Square::E4, MoveKind::DoublePush).unwrap();
@@ -624,7 +625,9 @@ impl CoreBoard {
                 }
             }
             if matches!(kind, MoveKind::DoublePush) {
-                if !(matches!(from.rank().relative(us), Rank::R2) && !occupied.get(from.forward(us))) {
+                if !(matches!(from.rank().relative(us), Rank::R2)
+                    && !occupied.get(from.forward(us)))
+                {
                     return Err(MoveError::InvalidDoublePush);
                 }
                 if from.forward(us).forward(us) as u8 != to as u8 {
@@ -635,7 +638,8 @@ impl CoreBoard {
                 return Err(MoveError::InvalidPawnMove);
             }
             return Ok(());
-        } else if matches!(kind, MoveKind::DoublePush | MoveKind::EnPassant) || kind.is_promotion() {
+        } else if matches!(kind, MoveKind::DoublePush | MoveKind::EnPassant) || kind.is_promotion()
+        {
             return Err(MoveError::InvalidMoveKind);
         }
 
@@ -667,7 +671,7 @@ impl CoreBoard {
     /// # Examples
     ///
     /// ```
-    /// use chess::{Square, mv::{Move, MoveKind}, board::BoardBuilder};
+    /// use smolchess::{Square, mv::{Move, MoveKind}, board::BoardBuilder};
     ///
     /// let board = BoardBuilder::classical().build().unwrap();
     /// let mv = Move::new(Square::E2, Square::E4, MoveKind::DoublePush).unwrap();
@@ -744,7 +748,10 @@ mod tests {
     fn test_invalid_moving_piece() {
         let board = create_standard_board();
         let mv = Move::new(Square::E4, Square::E5, MoveKind::Quiet).unwrap();
-        assert_eq!(board.check_pseudolegal_move(mv), Err(MoveError::InvalidMovingPiece));
+        assert_eq!(
+            board.check_pseudolegal_move(mv),
+            Err(MoveError::InvalidMovingPiece)
+        );
     }
 
     #[test]
@@ -752,7 +759,10 @@ mod tests {
         let board = create_standard_board();
         // G1 -> G3 is not a valid knight move and G3 is empty
         let mv = Move::new(Square::G1, Square::G3, MoveKind::Quiet).unwrap();
-        assert_eq!(board.check_pseudolegal_move(mv), Err(MoveError::InvalidToSquare));
+        assert_eq!(
+            board.check_pseudolegal_move(mv),
+            Err(MoveError::InvalidToSquare)
+        );
     }
 
     #[test]
@@ -779,7 +789,10 @@ mod tests {
             .build()
             .unwrap();
         let mv = Move::new(Square::E4, Square::F6, MoveKind::Capture).unwrap();
-        assert_eq!(board.check_pseudolegal_move(mv), Err(MoveError::MissingCapturedPiece));
+        assert_eq!(
+            board.check_pseudolegal_move(mv),
+            Err(MoveError::MissingCapturedPiece)
+        );
     }
 
     #[test]
@@ -793,7 +806,10 @@ mod tests {
             .build()
             .unwrap();
         let mv = Move::new(Square::E4, Square::F6, MoveKind::Quiet).unwrap();
-        assert_eq!(board.check_pseudolegal_move(mv), Err(MoveError::PieceCaptured));
+        assert_eq!(
+            board.check_pseudolegal_move(mv),
+            Err(MoveError::PieceCaptured)
+        );
     }
 
     #[test]
@@ -821,7 +837,10 @@ mod tests {
             .build()
             .unwrap();
         let mv = Move::new(Square::E2, Square::E4, MoveKind::DoublePush).unwrap();
-        assert_eq!(board.check_pseudolegal_move(mv), Err(MoveError::InvalidDoublePush));
+        assert_eq!(
+            board.check_pseudolegal_move(mv),
+            Err(MoveError::InvalidDoublePush)
+        );
     }
 
     #[test]
@@ -836,7 +855,10 @@ mod tests {
         let mv = Move::new(Square::E3, Square::E5, MoveKind::DoublePush).unwrap();
         // Pawn on E3 (rank 3 relative to white) cannot double push
         // Fails at the rank check in double push validation
-        assert_eq!(board.check_pseudolegal_move(mv), Err(MoveError::InvalidDoublePush));
+        assert_eq!(
+            board.check_pseudolegal_move(mv),
+            Err(MoveError::InvalidDoublePush)
+        );
     }
 
     #[test]
@@ -865,7 +887,10 @@ mod tests {
             .unwrap();
         // Try to capture on D5 (backward diagonal) - not a valid pawn attack
         let mv = Move::new(Square::E5, Square::D5, MoveKind::Capture).unwrap();
-        assert_eq!(board.check_pseudolegal_move(mv), Err(MoveError::InvalidToSquare));
+        assert_eq!(
+            board.check_pseudolegal_move(mv),
+            Err(MoveError::InvalidToSquare)
+        );
     }
 
     #[test]
@@ -898,7 +923,10 @@ mod tests {
         // Try en passant to F6 (diagonal attack square) when en_passant is D6
         let mv = Move::new(Square::E5, Square::F6, MoveKind::EnPassant).unwrap();
         // F6 is a valid pawn attack square from E5, but not the en_passant square
-        assert_eq!(board.check_pseudolegal_move(mv), Err(MoveError::InvalidEnPassant));
+        assert_eq!(
+            board.check_pseudolegal_move(mv),
+            Err(MoveError::InvalidEnPassant)
+        );
     }
 
     #[test]
@@ -912,7 +940,10 @@ mod tests {
             .build()
             .unwrap();
         let mv = Move::new(Square::E5, Square::D6, MoveKind::EnPassant).unwrap();
-        assert_eq!(board.check_pseudolegal_move(mv), Err(MoveError::InvalidEnPassant));
+        assert_eq!(
+            board.check_pseudolegal_move(mv),
+            Err(MoveError::InvalidEnPassant)
+        );
     }
 
     #[test]
@@ -938,7 +969,10 @@ mod tests {
             .build()
             .unwrap();
         let mv = Move::new(Square::E6, Square::E7, MoveKind::QueenPromotion).unwrap();
-        assert_eq!(board.check_pseudolegal_move(mv), Err(MoveError::InvalidPawnMove));
+        assert_eq!(
+            board.check_pseudolegal_move(mv),
+            Err(MoveError::InvalidPawnMove)
+        );
     }
 
     #[test]
@@ -952,7 +986,10 @@ mod tests {
             .unwrap();
         let mv = Move::new(Square::E7, Square::E8, MoveKind::Quiet).unwrap();
         // Pawn on 7th rank must promote, but move is Quiet
-        assert_eq!(board.check_pseudolegal_move(mv), Err(MoveError::InvalidPawnMove));
+        assert_eq!(
+            board.check_pseudolegal_move(mv),
+            Err(MoveError::InvalidPawnMove)
+        );
     }
 
     #[test]
@@ -979,7 +1016,10 @@ mod tests {
             .build()
             .unwrap();
         let mv = Move::new(Square::E4, Square::E6, MoveKind::DoublePush).unwrap();
-        assert_eq!(board.check_pseudolegal_move(mv), Err(MoveError::InvalidMoveKind));
+        assert_eq!(
+            board.check_pseudolegal_move(mv),
+            Err(MoveError::InvalidMoveKind)
+        );
     }
 
     #[test]
@@ -1034,7 +1074,10 @@ mod tests {
             .build()
             .unwrap();
         let mv = Move::new(Square::E1, Square::H1, MoveKind::KingCastle).unwrap();
-        assert_eq!(board.check_pseudolegal_move(mv), Err(MoveError::MissingCastlingRights));
+        assert_eq!(
+            board.check_pseudolegal_move(mv),
+            Err(MoveError::MissingCastlingRights)
+        );
     }
 
     #[test]
@@ -1054,7 +1097,10 @@ mod tests {
             .build()
             .unwrap();
         let mv = Move::new(Square::E1, Square::G1, MoveKind::KingCastle).unwrap();
-        assert_eq!(board.check_pseudolegal_move(mv), Err(MoveError::InvalidCastlingSquare));
+        assert_eq!(
+            board.check_pseudolegal_move(mv),
+            Err(MoveError::InvalidCastlingSquare)
+        );
     }
 
     #[test]
@@ -1075,7 +1121,10 @@ mod tests {
             .build()
             .unwrap();
         let mv = Move::new(Square::E1, Square::H1, MoveKind::KingCastle).unwrap();
-        assert_eq!(board.check_pseudolegal_move(mv), Err(MoveError::ObstructedCastlingPath));
+        assert_eq!(
+            board.check_pseudolegal_move(mv),
+            Err(MoveError::ObstructedCastlingPath)
+        );
     }
 
     #[test]
@@ -1122,6 +1171,9 @@ mod tests {
     fn test_invalid_king_move_too_far() {
         let board = create_standard_board();
         let mv = Move::new(Square::E1, Square::E3, MoveKind::Quiet).unwrap();
-        assert_eq!(board.check_pseudolegal_move(mv), Err(MoveError::InvalidToSquare));
+        assert_eq!(
+            board.check_pseudolegal_move(mv),
+            Err(MoveError::InvalidToSquare)
+        );
     }
 }

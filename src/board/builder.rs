@@ -6,10 +6,16 @@ use super::board::StateInfo;
 use super::zobrist::{castling_key, en_passant_key, piece_square_key, turn_key};
 use crate::CastlingSide;
 use crate::errors::FenError;
-use crate::{Bitboard, CastlingRights, Color, CoreBoard, File, Piece, PieceKind, Rank, Square, errors::BoardError};
+use crate::{
+    Bitboard, CastlingRights, Color, CoreBoard, File, Piece, PieceKind, Rank, Square,
+    errors::BoardError,
+};
 
 const fn frc_backrank(mut id: usize) -> [PieceKind; File::COUNT] {
-    const fn update_empties(backrank: &[PieceKind; File::COUNT], empties: &mut [usize; File::COUNT]) {
+    const fn update_empties(
+        backrank: &[PieceKind; File::COUNT],
+        empties: &mut [usize; File::COUNT],
+    ) {
         let mut i = 0;
         let mut count = 0;
 
@@ -64,7 +70,7 @@ const fn frc_backrank(mut id: usize) -> [PieceKind; File::COUNT] {
 /// # Examples
 ///
 /// ```
-/// use chess::board::BoardBuilder;
+/// use smolchess::board::BoardBuilder;
 ///
 /// let builder = BoardBuilder::classical();
 /// let core = builder.build().unwrap();
@@ -100,7 +106,7 @@ impl BoardBuilder {
     /// # Examples
     ///
     /// ```
-    /// use chess::board::BoardBuilder;
+    /// use smolchess::board::BoardBuilder;
     ///
     /// let builder = BoardBuilder::new();
     /// ```
@@ -128,7 +134,7 @@ impl BoardBuilder {
     /// # Examples
     ///
     /// ```
-    /// use chess::board::BoardBuilder;
+    /// use smolchess::board::BoardBuilder;
     ///
     /// let builder = BoardBuilder::classical();
     /// let core = builder.build().unwrap();
@@ -150,7 +156,7 @@ impl BoardBuilder {
     /// # Examples
     ///
     /// ```
-    /// use chess::board::BoardBuilder;
+    /// use smolchess::board::BoardBuilder;
     ///
     /// let builder = BoardBuilder::from_frc(0);
     /// assert!(builder.is_some());
@@ -173,7 +179,7 @@ impl BoardBuilder {
     /// # Examples
     ///
     /// ```
-    /// use chess::board::BoardBuilder;
+    /// use smolchess::board::BoardBuilder;
     ///
     /// let builder = BoardBuilder::dfrc(0, 0);
     /// assert!(builder.is_some());
@@ -234,7 +240,7 @@ impl BoardBuilder {
     /// # Examples
     ///
     /// ```
-    /// use chess::board::BoardBuilder;
+    /// use smolchess::board::BoardBuilder;
     ///
     /// let builder = BoardBuilder::from_fen("rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1");
     /// assert!(builder.is_ok());
@@ -338,7 +344,8 @@ impl BoardBuilder {
                         Some(piece) => piece,
                         None => return Err(FenError::InvalidPiece),
                     };
-                    let square = Square::new(File::from_u8(file).unwrap(), Rank::from_u8(rank).unwrap());
+                    let square =
+                        Square::new(File::from_u8(file).unwrap(), Rank::from_u8(rank).unwrap());
                     builder = builder.piece(square, Some(piece));
                     file += 1;
                 }
@@ -355,11 +362,19 @@ impl BoardBuilder {
         let king_squares = [
             match builder.king_square(Color::White) {
                 Some(square) => square,
-                None => return Err(FenError::MissingKing { color: Color::White }),
+                None => {
+                    return Err(FenError::MissingKing {
+                        color: Color::White,
+                    });
+                }
             },
             match builder.king_square(Color::Black) {
                 Some(square) => square,
-                None => return Err(FenError::MissingKing { color: Color::Black }),
+                None => {
+                    return Err(FenError::MissingKing {
+                        color: Color::Black,
+                    });
+                }
             },
         ];
 
@@ -389,7 +404,11 @@ impl BoardBuilder {
                             }
                             file = file.shift(-1).unwrap();
                         }
-                        if file as u8 == king_file as u8 { File::H } else { file }
+                        if file as u8 == king_file as u8 {
+                            File::H
+                        } else {
+                            file
+                        }
                     }
                     b'q' => {
                         let mut file = File::A;
@@ -401,7 +420,11 @@ impl BoardBuilder {
                             }
                             file = file.shift(1).unwrap();
                         }
-                        if file as u8 == king_file as u8 { File::A } else { file }
+                        if file as u8 == king_file as u8 {
+                            File::A
+                        } else {
+                            file
+                        }
                     }
                     _ => match File::from_char(byte as char) {
                         Some(file) => file,
@@ -452,7 +475,7 @@ impl BoardBuilder {
     /// # Examples
     ///
     /// ```
-    /// use chess::{Square, board::BoardBuilder};
+    /// use smolchess::{Square, board::BoardBuilder};
     ///
     /// let builder = BoardBuilder::classical();
     /// assert!(builder.piece_on(Square::E2).is_some());
@@ -474,7 +497,7 @@ impl BoardBuilder {
     /// # Examples
     ///
     /// ```
-    /// use chess::{Color, board::BoardBuilder};
+    /// use smolchess::{Color, board::BoardBuilder};
     ///
     /// let builder = BoardBuilder::classical();
     /// assert!(builder.king_square(Color::White).is_some());
@@ -507,7 +530,7 @@ impl BoardBuilder {
     /// # Examples
     ///
     /// ```
-    /// use chess::{Square, Piece, board::BoardBuilder};
+    /// use smolchess::{Square, Piece, board::BoardBuilder};
     ///
     /// let builder = BoardBuilder::new().piece(Square::E4, Some(Piece::WhiteQueen));
     /// ```
@@ -530,7 +553,7 @@ impl BoardBuilder {
     /// # Examples
     ///
     /// ```
-    /// use chess::{Bitboard, Piece, Rank, board::BoardBuilder};
+    /// use smolchess::{Bitboard, Piece, Rank, board::BoardBuilder};
     ///
     /// let builder = BoardBuilder::new().pieces(Rank::R2.to_bitboard(), Some(Piece::WhitePawn));
     /// ```
@@ -554,7 +577,7 @@ impl BoardBuilder {
     /// # Examples
     ///
     /// ```
-    /// use chess::{Color, board::BoardBuilder};
+    /// use smolchess::{Color, board::BoardBuilder};
     ///
     /// let builder = BoardBuilder::new().side_to_move(Color::Black);
     /// ```
@@ -576,7 +599,7 @@ impl BoardBuilder {
     /// # Examples
     ///
     /// ```
-    /// use chess::{CastlingRights, board::BoardBuilder};
+    /// use smolchess::{CastlingRights, board::BoardBuilder};
     ///
     /// let builder = BoardBuilder::new().castling_rights(CastlingRights::NONE);
     /// ```
@@ -598,7 +621,7 @@ impl BoardBuilder {
     /// # Examples
     ///
     /// ```
-    /// use chess::{Square, board::BoardBuilder};
+    /// use smolchess::{Square, board::BoardBuilder};
     ///
     /// let builder = BoardBuilder::new().en_passant(Some(Square::E3));
     /// ```
@@ -620,7 +643,7 @@ impl BoardBuilder {
     /// # Examples
     ///
     /// ```
-    /// use chess::{board::BoardBuilder};
+    /// use smolchess::{board::BoardBuilder};
     /// use core::num::NonZeroU16;
     ///
     /// let builder = BoardBuilder::new().fullmove_number(NonZeroU16::new(10).unwrap());
@@ -643,7 +666,7 @@ impl BoardBuilder {
     /// # Examples
     ///
     /// ```
-    /// use chess::board::BoardBuilder;
+    /// use smolchess::board::BoardBuilder;
     ///
     /// let builder = BoardBuilder::new().halfmove_clock(50);
     /// ```
@@ -665,7 +688,7 @@ impl BoardBuilder {
     /// # Examples
     ///
     /// ```
-    /// use chess::board::BoardBuilder;
+    /// use smolchess::board::BoardBuilder;
     ///
     /// let builder = BoardBuilder::new().frc(true);
     /// ```
@@ -695,7 +718,8 @@ impl BoardBuilder {
             kinds: [Bitboard::EMPTY; 6],
 
             side_to_move: self.side_to_move,
-            halfmove_number: (self.fullmove_number.get() - 1) * 2 + matches!(self.side_to_move, Color::Black) as u16,
+            halfmove_number: (self.fullmove_number.get() - 1) * 2
+                + matches!(self.side_to_move, Color::Black) as u16,
             state,
 
             is_frc: self.is_frc,
@@ -738,7 +762,7 @@ impl BoardBuilder {
     /// # Examples
     ///
     /// ```
-    /// use chess::board::BoardBuilder;
+    /// use smolchess::board::BoardBuilder;
     ///
     /// let builder = BoardBuilder::classical();
     /// let core = builder.build().unwrap();
@@ -794,7 +818,10 @@ impl BoardBuilder {
             let kingside = board.castling_rights().get(color, CastlingSide::Kingside);
             let queenside = board.castling_rights().get(color, CastlingSide::Kingside);
 
-            if !Rank::R1.relative(color).to_bitboard().get(board.king_square(color))
+            if !Rank::R1
+                .relative(color)
+                .to_bitboard()
+                .get(board.king_square(color))
                 && (kingside.is_some() || queenside.is_some())
             {
                 return Err(BoardError::InvalidCastlingKing { color });
@@ -856,7 +883,7 @@ impl BoardBuilder {
     /// # Examples
     ///
     /// ```
-    /// use chess::board::BoardBuilder;
+    /// use smolchess::board::BoardBuilder;
     ///
     /// let builder = BoardBuilder::classical();
     /// let core = unsafe { builder.build_unchecked() };
@@ -882,7 +909,7 @@ impl BoardBuilder {
     /// # Examples
     ///
     /// ```
-    /// use chess::board::BoardBuilder;
+    /// use smolchess::board::BoardBuilder;
     ///
     /// let builder = BoardBuilder::classical();
     /// let mut s = String::new();
@@ -1036,7 +1063,8 @@ mod tests {
 
     #[test]
     fn test_builder_pieces() {
-        let builder = BoardBuilder::new().pieces(Bitboard::from_rank(Rank::R2), Some(Piece::WhitePawn));
+        let builder =
+            BoardBuilder::new().pieces(Bitboard::from_rank(Rank::R2), Some(Piece::WhitePawn));
         assert_eq!(builder.piece_on(Square::A2), Some(Piece::WhitePawn));
         assert_eq!(builder.piece_on(Square::B2), Some(Piece::WhitePawn));
         assert_eq!(builder.piece_on(Square::A3), None);
@@ -1050,7 +1078,8 @@ mod tests {
 
     #[test]
     fn test_builder_castling_rights() {
-        let rights = CastlingRights::new(Some(File::H), Some(File::A), Some(File::H), Some(File::A));
+        let rights =
+            CastlingRights::new(Some(File::H), Some(File::A), Some(File::H), Some(File::A));
         let builder = BoardBuilder::new().castling_rights(rights);
         assert_eq!(builder.castling_rights, rights);
     }
@@ -1082,7 +1111,11 @@ mod tests {
     #[test]
     fn test_from_frc_valid() {
         for id in 0..960 {
-            assert!(BoardBuilder::from_frc(id).is_some(), "FRC id {} should be valid", id);
+            assert!(
+                BoardBuilder::from_frc(id).is_some(),
+                "FRC id {} should be valid",
+                id
+            );
         }
     }
 
@@ -1157,7 +1190,9 @@ mod tests {
         let result = builder.build();
         assert!(matches!(
             result,
-            Err(BoardError::PawnsOnBackranks { color: Color::White })
+            Err(BoardError::PawnsOnBackranks {
+                color: Color::White
+            })
         ));
     }
 
@@ -1193,7 +1228,10 @@ mod tests {
         }
 
         let result = builder.build();
-        assert!(matches!(result, Err(BoardError::TooManyPromotedPieces { .. })));
+        assert!(matches!(
+            result,
+            Err(BoardError::TooManyPromotedPieces { .. })
+        ));
     }
 
     #[test]
@@ -1215,7 +1253,10 @@ mod tests {
             .piece(Square::E8, Some(Piece::BlackKing))
             .castling_rights(CastlingRights::new(Some(File::H), None, None, None)); // No rook on H1
         let result = builder.build();
-        assert!(matches!(result, Err(BoardError::MissingCastlingRook { .. })));
+        assert!(matches!(
+            result,
+            Err(BoardError::MissingCastlingRook { .. })
+        ));
     }
 
     #[test]

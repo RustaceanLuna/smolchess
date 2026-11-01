@@ -26,7 +26,7 @@ impl Outcome {
     /// # Examples
     ///
     /// ```
-    /// use chess::board::Outcome;
+    /// use smolchess::board::Outcome;
     ///
     /// assert!(Outcome::Checkmate.is_checkmate());
     /// ```
@@ -46,7 +46,7 @@ impl Outcome {
     /// # Examples
     ///
     /// ```
-    /// use chess::board::Outcome;
+    /// use smolchess::board::Outcome;
     ///
     /// assert!(Outcome::Stalemate.is_forced_draw());
     /// ```
@@ -69,7 +69,7 @@ impl Outcome {
     /// # Examples
     ///
     /// ```
-    /// use chess::board::Outcome;
+    /// use smolchess::board::Outcome;
     ///
     /// assert!(Outcome::Repetition3.is_claimable_draw());
     /// ```
@@ -86,7 +86,7 @@ impl Outcome {
     /// # Examples
     ///
     /// ```
-    /// use chess::board::Outcome;
+    /// use smolchess::board::Outcome;
     ///
     /// assert!(Outcome::Stalemate.is_draw());
     /// ```
@@ -108,7 +108,7 @@ impl CoreBoard {
     /// # Examples
     ///
     /// ```
-    /// use chess::board::BoardBuilder;
+    /// use smolchess::board::BoardBuilder;
     ///
     /// let core = BoardBuilder::classical().build().unwrap();
     /// let outcome = core.outcome();
@@ -149,7 +149,8 @@ impl CoreBoard {
 
             if knights.popcount() == 0
                 && (bishops.popcount() == 1
-                    || (bishops.intersect(Bitboard::LIGHT).is_empty() || bishops.intersect(Bitboard::DARK).is_empty()))
+                    || (bishops.intersect(Bitboard::LIGHT).is_empty()
+                        || bishops.intersect(Bitboard::DARK).is_empty()))
             {
                 return Some(Outcome::InsuffMaterial);
             }

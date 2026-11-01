@@ -19,7 +19,7 @@ impl Move {
     /// # Examples
     ///
     /// ```
-    /// use chess::{Square, mv::{Move, MoveKind}};
+    /// use smolchess::{Square, mv::{Move, MoveKind}};
     ///
     /// let mv = Move::new(Square::E2, Square::E4, MoveKind::DoublePush).unwrap();
     /// let mut s = String::new();
@@ -28,10 +28,10 @@ impl Move {
     /// ```
     pub fn write_uci(self, w: &mut impl Write) -> fmt::Result {
         write!(w, "{}", self.from())?;
-        let to = self
-            .kind()
-            .castling_side()
-            .map_or_else(|| self.to(), |side| Square::new(side.king_to_file(), self.to().rank()));
+        let to = self.kind().castling_side().map_or_else(
+            || self.to(),
+            |side| Square::new(side.king_to_file(), self.to().rank()),
+        );
         write!(w, "{}", to)?;
         if let Some(piece_kind) = self.kind().promotion() {
             write!(w, "{}", piece_kind.to_lower_char())?;
@@ -54,7 +54,7 @@ impl Move {
     /// # Examples
     ///
     /// ```
-    /// use chess::{Square, mv::{Move, MoveKind}};
+    /// use smolchess::{Square, mv::{Move, MoveKind}};
     ///
     /// let mv = Move::new(Square::E2, Square::E4, MoveKind::DoublePush).unwrap();
     /// let mut s = String::new();
@@ -94,7 +94,7 @@ impl Display for Move {
 /// # Examples
 ///
 /// ```
-/// use chess::{Square, mv::{Move, MoveKind}, board::BoardBuilder};
+/// use smolchess::{Square, mv::{Move, MoveKind}, board::BoardBuilder};
 ///
 /// let core = BoardBuilder::classical().build().unwrap();
 /// let mv = Move::new(Square::E2, Square::E4, MoveKind::DoublePush).unwrap();
@@ -125,7 +125,7 @@ impl CoreBoard {
     /// # Examples
     ///
     /// ```
-    /// use chess::{Square, mv::{Move, MoveKind}, board::BoardBuilder};
+    /// use smolchess::{Square, mv::{Move, MoveKind}, board::BoardBuilder};
     ///
     /// let core = BoardBuilder::classical().build().unwrap();
     /// let mv = Move::new(Square::E2, Square::E4, MoveKind::DoublePush).unwrap();
@@ -196,7 +196,11 @@ impl Display for San<'_> {
             let mut temp = self.board.clone();
             temp.make_move_unchecked(self.mv);
             if !temp.checkers().is_empty() {
-                f.write_char(if temp.legal_moves().is_empty() { '#' } else { '+' })?;
+                f.write_char(if temp.legal_moves().is_empty() {
+                    '#'
+                } else {
+                    '+'
+                })?;
             }
         };
 

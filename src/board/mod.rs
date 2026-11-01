@@ -10,7 +10,7 @@
 /// # Examples
 ///
 /// ```
-/// use chess::board::BoardBuilder;
+/// use smolchess::board::BoardBuilder;
 ///
 /// let core = BoardBuilder::classical().build().unwrap();
 /// ```

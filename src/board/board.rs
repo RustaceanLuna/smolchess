@@ -6,7 +6,8 @@ use core::fmt::{self, Debug, Display};
 use core::ops::Deref;
 
 use crate::attacks::{
-    bishop_attacks, king_attacks, knight_attacks, pawn_attacks, pawn_attacks_bb, queen_attacks, rook_attacks,
+    bishop_attacks, king_attacks, knight_attacks, pawn_attacks, pawn_attacks_bb, queen_attacks,
+    rook_attacks,
 };
 use crate::{Bitboard, CastlingRights, Color, Move, Piece, PieceKind, Square};
 
@@ -44,7 +45,7 @@ pub struct StateInfo {
 /// # Examples
 ///
 /// ```
-/// use chess::board::BoardBuilder;
+/// use smolchess::board::BoardBuilder;
 ///
 /// let core = BoardBuilder::classical().build().unwrap();
 /// ```
@@ -75,7 +76,7 @@ impl CoreBoard {
     /// # Examples
     ///
     /// ```
-    /// use chess::{Square, board::BoardBuilder};
+    /// use smolchess::{Square, board::BoardBuilder};
     ///
     /// let core = BoardBuilder::classical().build().unwrap();
     /// assert!(core.piece_on(Square::E2).is_some());
@@ -93,7 +94,7 @@ impl CoreBoard {
     /// # Examples
     ///
     /// ```
-    /// use chess::board::BoardBuilder;
+    /// use smolchess::board::BoardBuilder;
     ///
     /// let core = BoardBuilder::classical().build().unwrap();
     /// let mailbox = core.mailbox();
@@ -115,7 +116,7 @@ impl CoreBoard {
     /// # Examples
     ///
     /// ```
-    /// use chess::{Color, board::BoardBuilder};
+    /// use smolchess::{Color, board::BoardBuilder};
     ///
     /// let core = BoardBuilder::classical().build().unwrap();
     /// let white = core.color_bb(Color::White);
@@ -137,7 +138,7 @@ impl CoreBoard {
     /// # Examples
     ///
     /// ```
-    /// use chess::{PieceKind, board::BoardBuilder};
+    /// use smolchess::{PieceKind, board::BoardBuilder};
     ///
     /// let core = BoardBuilder::classical().build().unwrap();
     /// let pawns = core.kind_bb(PieceKind::Pawn);
@@ -160,7 +161,7 @@ impl CoreBoard {
     /// # Examples
     ///
     /// ```
-    /// use chess::{PieceKind, board::BoardBuilder};
+    /// use smolchess::{PieceKind, board::BoardBuilder};
     ///
     /// let core = BoardBuilder::classical().build().unwrap();
     /// let sliders = core.kind2_bb(PieceKind::Rook, PieceKind::Queen);
@@ -183,7 +184,7 @@ impl CoreBoard {
     /// # Examples
     ///
     /// ```
-    /// use chess::{Color, PieceKind, board::BoardBuilder};
+    /// use smolchess::{Color, PieceKind, board::BoardBuilder};
     ///
     /// let core = BoardBuilder::classical().build().unwrap();
     /// let white_pawns = core.piece_bb(Color::White, PieceKind::Pawn);
@@ -207,7 +208,7 @@ impl CoreBoard {
     /// # Examples
     ///
     /// ```
-    /// use chess::{Color, PieceKind, board::BoardBuilder};
+    /// use smolchess::{Color, PieceKind, board::BoardBuilder};
     ///
     /// let core = BoardBuilder::classical().build().unwrap();
     /// let white_sliders = core.piece2_bb(Color::White, PieceKind::Rook, PieceKind::Queen);
@@ -225,13 +226,14 @@ impl CoreBoard {
     /// # Examples
     ///
     /// ```
-    /// use chess::board::BoardBuilder;
+    /// use smolchess::board::BoardBuilder;
     ///
     /// let core = BoardBuilder::classical().build().unwrap();
     /// let occupied = core.occupied();
     /// ```
     pub const fn occupied(&self) -> Bitboard {
-        self.color_bb(Color::White).union(self.color_bb(Color::Black))
+        self.color_bb(Color::White)
+            .union(self.color_bb(Color::Black))
     }
 
     /// Returns the square of the king for a color.
@@ -251,13 +253,17 @@ impl CoreBoard {
     /// # Examples
     ///
     /// ```
-    /// use chess::{Color, board::BoardBuilder};
+    /// use smolchess::{Color, board::BoardBuilder};
     ///
     /// let core = BoardBuilder::classical().build().unwrap();
     /// let king_square = core.king_square(Color::White);
     /// ```
     pub const fn king_square(&self, color: Color) -> Square {
-        unsafe { self.piece_bb(color, PieceKind::King).pop_lsb().unwrap_unchecked() }
+        unsafe {
+            self.piece_bb(color, PieceKind::King)
+                .pop_lsb()
+                .unwrap_unchecked()
+        }
     }
 
     /// Returns the number of pieces of a kind for a color.
@@ -274,7 +280,7 @@ impl CoreBoard {
     /// # Examples
     ///
     /// ```
-    /// use chess::{Color, PieceKind, board::BoardBuilder};
+    /// use smolchess::{Color, PieceKind, board::BoardBuilder};
     ///
     /// let core = BoardBuilder::classical().build().unwrap();
     /// let count = core.count_pieces(Color::White, PieceKind::Pawn);
@@ -293,7 +299,7 @@ impl CoreBoard {
     /// # Examples
     ///
     /// ```
-    /// use chess::board::BoardBuilder;
+    /// use smolchess::board::BoardBuilder;
     ///
     /// let core = BoardBuilder::classical().build().unwrap();
     /// let side = core.side_to_move();
@@ -311,7 +317,7 @@ impl CoreBoard {
     /// # Examples
     ///
     /// ```
-    /// use chess::board::BoardBuilder;
+    /// use smolchess::board::BoardBuilder;
     ///
     /// let core = BoardBuilder::classical().build().unwrap();
     /// let halfmoves = core.halfmove_number();
@@ -329,7 +335,7 @@ impl CoreBoard {
     /// # Examples
     ///
     /// ```
-    /// use chess::board::BoardBuilder;
+    /// use smolchess::board::BoardBuilder;
     ///
     /// let core = BoardBuilder::classical().build().unwrap();
     /// let fullmoves = core.fullmove_number();
@@ -347,7 +353,7 @@ impl CoreBoard {
     /// # Examples
     ///
     /// ```
-    /// use chess::board::BoardBuilder;
+    /// use smolchess::board::BoardBuilder;
     ///
     /// let core = BoardBuilder::classical().build().unwrap();
     /// assert!(!core.is_frc());
@@ -365,7 +371,7 @@ impl CoreBoard {
     /// # Examples
     ///
     /// ```
-    /// use chess::board::BoardBuilder;
+    /// use smolchess::board::BoardBuilder;
     ///
     /// let core = BoardBuilder::classical().build().unwrap();
     /// let rights = core.castling_rights();
@@ -383,7 +389,7 @@ impl CoreBoard {
     /// # Examples
     ///
     /// ```
-    /// use chess::board::BoardBuilder;
+    /// use smolchess::board::BoardBuilder;
     ///
     /// let core = BoardBuilder::classical().build().unwrap();
     /// let ep = core.en_passant();
@@ -401,7 +407,7 @@ impl CoreBoard {
     /// # Examples
     ///
     /// ```
-    /// use chess::board::BoardBuilder;
+    /// use smolchess::board::BoardBuilder;
     ///
     /// let core = BoardBuilder::classical().build().unwrap();
     /// let captured = core.captured_piece();
@@ -419,7 +425,7 @@ impl CoreBoard {
     /// # Examples
     ///
     /// ```
-    /// use chess::board::BoardBuilder;
+    /// use smolchess::board::BoardBuilder;
     ///
     /// let core = BoardBuilder::classical().build().unwrap();
     /// let key = core.zobrist_key();
@@ -437,7 +443,7 @@ impl CoreBoard {
     /// # Examples
     ///
     /// ```
-    /// use chess::board::BoardBuilder;
+    /// use smolchess::board::BoardBuilder;
     ///
     /// let core = BoardBuilder::classical().build().unwrap();
     /// let clock = core.halfmove_clock();
@@ -455,7 +461,7 @@ impl CoreBoard {
     /// # Examples
     ///
     /// ```
-    /// use chess::board::BoardBuilder;
+    /// use smolchess::board::BoardBuilder;
     ///
     /// let core = BoardBuilder::classical().build().unwrap();
     /// let repetition = core.repetition();
@@ -473,7 +479,7 @@ impl CoreBoard {
     /// # Examples
     ///
     /// ```
-    /// use chess::board::BoardBuilder;
+    /// use smolchess::board::BoardBuilder;
     ///
     /// let core = BoardBuilder::classical().build().unwrap();
     /// let checkers = core.checkers();
@@ -491,7 +497,7 @@ impl CoreBoard {
     /// # Examples
     ///
     /// ```
-    /// use chess::board::BoardBuilder;
+    /// use smolchess::board::BoardBuilder;
     ///
     /// let core = BoardBuilder::classical().build().unwrap();
     /// let dangers = core.dangers();
@@ -513,7 +519,7 @@ impl CoreBoard {
     /// # Examples
     ///
     /// ```
-    /// use chess::{Color, board::BoardBuilder};
+    /// use smolchess::{Color, board::BoardBuilder};
     ///
     /// let core = BoardBuilder::classical().build().unwrap();
     /// let pinned = core.pinned(Color::White);
@@ -535,7 +541,7 @@ impl CoreBoard {
     /// # Examples
     ///
     /// ```
-    /// use chess::{Color, board::BoardBuilder};
+    /// use smolchess::{Color, board::BoardBuilder};
     ///
     /// let core = BoardBuilder::classical().build().unwrap();
     /// let pinners = core.pinners(Color::Black);
@@ -573,7 +579,7 @@ impl CoreBoard {
     /// # Examples
     ///
     /// ```
-    /// use chess::{Square, Bitboard, board::BoardBuilder};
+    /// use smolchess::{Square, Bitboard, board::BoardBuilder};
     ///
     /// let core = BoardBuilder::classical().build().unwrap();
     /// let attackers = core.attackers_to(Square::E4, core.occupied());
@@ -586,7 +592,10 @@ impl CoreBoard {
             self.piece_bb(Color::Black, PieceKind::Pawn)
                 .intersect(pawn_attacks(square, Color::White)),
         )
-        .union(self.kind_bb(PieceKind::Knight).intersect(knight_attacks(square)))
+        .union(
+            self.kind_bb(PieceKind::Knight)
+                .intersect(knight_attacks(square)),
+        )
         .union(
             self.kind2_bb(PieceKind::Bishop, PieceKind::Queen)
                 .intersect(bishop_attacks(square, occupied)),
@@ -595,7 +604,10 @@ impl CoreBoard {
             self.kind2_bb(PieceKind::Rook, PieceKind::Queen)
                 .intersect(rook_attacks(square, occupied)),
         )
-        .union(self.kind_bb(PieceKind::King).intersect(king_attacks(square)))
+        .union(
+            self.kind_bb(PieceKind::King)
+                .intersect(king_attacks(square)),
+        )
     }
 
     /// Checks if a square is attacked by a color.
@@ -612,7 +624,7 @@ impl CoreBoard {
     /// # Examples
     ///
     /// ```
-    /// use chess::{Square, Color, board::BoardBuilder};
+    /// use smolchess::{Square, Color, board::BoardBuilder};
     ///
     /// let core = BoardBuilder::classical().build().unwrap();
     /// let attacked = core.is_attacked(Square::E4, Color::Black);
@@ -621,7 +633,10 @@ impl CoreBoard {
         !(self
             .kind_bb(PieceKind::Pawn)
             .intersect(pawn_attacks(square, color.other())))
-        .union(self.kind_bb(PieceKind::Knight).intersect(knight_attacks(square)))
+        .union(
+            self.kind_bb(PieceKind::Knight)
+                .intersect(knight_attacks(square)),
+        )
         .union(
             self.kind2_bb(PieceKind::Bishop, PieceKind::Queen)
                 .intersect(bishop_attacks(square, self.occupied())),
@@ -630,7 +645,10 @@ impl CoreBoard {
             self.kind2_bb(PieceKind::Rook, PieceKind::Queen)
                 .intersect(rook_attacks(square, self.occupied())),
         )
-        .union(self.kind_bb(PieceKind::King).intersect(king_attacks(square)))
+        .union(
+            self.kind_bb(PieceKind::King)
+                .intersect(king_attacks(square)),
+        )
         .intersect(self.color_bb(color))
         .is_empty()
     }
@@ -692,20 +710,28 @@ impl CoreBoard {
 
         let mut bishops = self.piece_bb(them, PieceKind::Bishop);
         while let Some(square) = bishops.pop_lsb() {
-            self.state.dangers.union_assign(bishop_attacks(square, occupied));
+            self.state
+                .dangers
+                .union_assign(bishop_attacks(square, occupied));
         }
 
         let mut rooks = self.piece_bb(them, PieceKind::Rook);
         while let Some(square) = rooks.pop_lsb() {
-            self.state.dangers.union_assign(rook_attacks(square, occupied));
+            self.state
+                .dangers
+                .union_assign(rook_attacks(square, occupied));
         }
 
         let mut queens = self.piece_bb(them, PieceKind::Queen);
         while let Some(square) = queens.pop_lsb() {
-            self.state.dangers.union_assign(queen_attacks(square, occupied));
+            self.state
+                .dangers
+                .union_assign(queen_attacks(square, occupied));
         }
 
-        self.state.dangers.union_assign(king_attacks(self.king_square(them)));
+        self.state
+            .dangers
+            .union_assign(king_attacks(self.king_square(them)));
     }
 
     pub(crate) const fn update_en_passant(&mut self) {
@@ -723,7 +749,9 @@ impl CoreBoard {
             self.state.en_passant = None;
             return;
         }
-        let mut attackers = self.piece_bb(us, PieceKind::Pawn).intersect(pawn_attacks(square, them));
+        let mut attackers = self
+            .piece_bb(us, PieceKind::Pawn)
+            .intersect(pawn_attacks(square, them));
 
         while let Some(attacker) = attackers.pop_lsb() {
             let new_occupied = self.occupied().with(square).without(attacker).without(pawn);
@@ -771,7 +799,7 @@ impl CoreBoard {
 /// # Examples
 ///
 /// ```
-/// use chess::board::{Board, BoardBuilder};
+/// use smolchess::board::{Board, BoardBuilder};
 ///
 /// let core = BoardBuilder::classical().build().unwrap();
 /// let board = Board::new(core);
@@ -798,7 +826,7 @@ impl Board {
     /// # Examples
     ///
     /// ```
-    /// use chess::board::{Board, BoardBuilder};
+    /// use smolchess::board::{Board, BoardBuilder};
     ///
     /// let core = BoardBuilder::classical().build().unwrap();
     /// let board = Board::new(core);
