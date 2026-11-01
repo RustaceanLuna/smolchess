@@ -1,5 +1,6 @@
 [package]
 name = "smolchess"
+description = "A chess library for Rust, supporting Classical, FRC and DFRC"
 version = "0.1.0"
 edition = "2024"
 categories = ["no-std", "no-std::no-alloc", "game"]
